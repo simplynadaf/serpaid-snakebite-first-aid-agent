@@ -1,0 +1,8 @@
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_intro.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_problem.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_caseA.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_caseB.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_caseC.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_safety.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_repo.mp3'
+file '/home/ec2-user/serpaid-snakebite-first-aid-agent/assets/audio/w_outro.mp3'

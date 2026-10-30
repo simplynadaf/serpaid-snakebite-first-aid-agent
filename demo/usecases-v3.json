@@ -1,0 +1,35 @@
+[
+  {
+    "id": "A",
+    "eyebrow": "A sleeping-bite emergency",
+    "title": "Stops the rescuer from making it worse.",
+    "msg": "My son was bitten while sleeping on the floor. My brother is sucking the venom out by mouth. My son cannot swallow properly now.",
+    "myth": "Suck the venom out by mouth or with a suction pump.",
+    "sev": "EMERGENCY",
+    "langlab": "Telugu · spoken by Polly",
+    "deva": false,
+    "out": "ఆపండి. విషాన్ని పీల్చవద్దు, అది పని చేయదు మరియు మీ ఇద్దరికీ హాని చేస్తుంది. అతనిని ఇంకా ఉంచండి, తాగడానికి ఏమీ ఇవ్వకండి, ఇప్పుడు యాంటీవెన్మ్తో ఆసుపత్రికి చేరుకోండి. అత్యవసర పరిస్థితి: 108."
+  },
+  {
+    "id": "B",
+    "eyebrow": "A farm worker, hours from a clinic",
+    "title": "Ends the wait-and-see that costs limbs.",
+    "msg": "A worker was bitten two hours ago in the fields. We packed it in ice and are waiting to see if it gets worse. The leg is badly swollen.",
+    "myth": "Pack the bite in ice.",
+    "sev": "URGENT",
+    "langlab": "Portuguese · spoken by Polly",
+    "deva": false,
+    "out": "Não espere e não use gelo. Remova-o. Inchaço severo significa ir agora, de veículo, a um hospital com soro antiofídico. Emergência: 192."
+  },
+  {
+    "id": "C",
+    "eyebrow": "A pregnant woman, bleeding",
+    "title": "Calm, correct, in her own language.",
+    "msg": "My wife is pregnant and was bitten near the river. The wound keeps bleeding and we are very scared. What do we do?",
+    "myth": null,
+    "sev": "EMERGENCY",
+    "langlab": "Bengali · spoken by Polly",
+    "deva": false,
+    "out": "শান্ত থাকুন। তাকে শান্ত রাখুন এবং শুয়ে থাকুন। কিছু বাঁধবেন না বা কাটাবেন না। রক্তপাত যা থামবে না তা গুরুতর, এখনই অ্যান্টিভেনম সহ হাসপাতালে পৌঁছান। জরুরী অবস্থা: 108।"
+  }
+]

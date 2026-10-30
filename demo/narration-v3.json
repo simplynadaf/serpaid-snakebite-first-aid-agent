@@ -1,0 +1,15 @@
+{
+  "voice": "Ruth",
+  "engine": "long-form",
+  "note": "Produced demo v3. Different high-impact use cases. No em dashes.",
+  "segments": [
+    {"id":"w_intro",   "text":"SerpAID. The sixty seconds that save a life after a snakebite."},
+    {"id":"w_problem", "text":"A snake bites someone every five minutes, and up to one hundred and thirty eight thousand people die every year. Most of those deaths are not caused by the venom alone. They are caused by what frightened people do in the first minutes, and by the delay in reaching antivenom. This became personal the day a snake bit my cousin, and nobody around us knew what to do."},
+    {"id":"w_caseA",   "text":"A boy is bitten while sleeping on the floor, a classic krait bite. His uncle is trying to suck the venom out by mouth, and the boy can no longer swallow. SerpAID stops the suction at once, flags the swallowing as a neurotoxic emergency, and answers in Telugu. That is a life it just changed."},
+    {"id":"w_caseB",   "text":"A farm worker is bitten hours from the nearest clinic. The family packed the bite in ice and are waiting to see if it gets worse. That wait is what costs limbs. SerpAID ends it, tells them to remove the ice and move now, and speaks in Portuguese for a worker in Brazil."},
+    {"id":"w_caseC",   "text":"A pregnant woman is bitten near a river and the wound will not stop bleeding. There is no myth to correct here, but SerpAID still treats it as the emergency it is, keeps the family calm, and delivers clear guidance in Bengali. Calm, correct, in her own language."},
+    {"id":"w_safety",  "text":"Across every case, the same rule holds. The language model never decides anything medical. A tested, deterministic engine owns every instruction and can never recommend a tourniquet, a cut, suction, or ice. Amazon Nova only phrases the plan and translates it."},
+    {"id":"w_repo",    "text":"SerpAID is built with the Strands Agents SDK and Amazon Nova, deployed live on Bedrock AgentCore, and it is fully open source on GitHub under the MIT license."},
+    {"id":"w_outro",   "text":"If this could help someone in the first minutes of a snakebite, please like, comment, share, and subscribe. The code and all links are in the description. Thank you for watching."}
+  ]
+}

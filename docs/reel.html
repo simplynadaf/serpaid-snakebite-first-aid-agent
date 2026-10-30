@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&family=Noto+Sans+Telugu:wght@400;500&family=Noto+Sans+Bengali:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{--bg:#070b0a;--ink:#eef3f1;--venom:#38ffb0;--amber:#ffc24b;--danger:#ff7a7a;--muted:#9fb3ac;--faint:#6b7f78;--line:rgba(120,170,155,.16)}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -39,6 +39,8 @@
   .lang{background:linear-gradient(180deg,rgba(56,255,176,.14),rgba(56,255,176,.06));border:1px solid rgba(56,255,176,.22)}
   .lang .lab{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--venom);margin-bottom:6px}
   .deva{font-family:'Noto Sans Devanagari','Inter',sans-serif}
+  .telu{font-family:'Noto Sans Telugu','Inter',sans-serif}
+  .beng{font-family:'Noto Sans Bengali','Inter',sans-serif}
 
   /* repo scene */
   #repo{align-items:flex-start}
@@ -78,41 +80,41 @@
   <div class="by">built by Sarvar Nadaf</div>
 </div>
 
-<!-- CASE 1 -->
+<!-- CASE A -->
 <div class="scene case" id="case1">
-  <div class="eyebrow">Use case 1 · the tourniquet myth</div>
-  <h1>Catches the folklore that kills.</h1>
+  <div class="eyebrow">A sleeping-bite emergency · the suction myth</div>
+  <h1>Stops the rescuer from making it worse.</h1>
   <div class="phone">
     <div class="bar"><span class="d"></span> SerpAID · emergency mode</div>
-    <div class="msg user">A snake bit my cousin near Pune. Should I tie a tight cloth and go to the village healer? His eyelids feel heavy.</div>
+    <div class="msg user">My son was bitten while sleeping on the floor. My brother is sucking the venom out by mouth. My son cannot swallow properly now.</div>
     <span class="sev">SEVERITY: EMERGENCY</span>
-    <div class="msg alert"><div class="lab">⚠ myth caught</div>Do not tie a tight cloth, and do not go to a healer first. A tourniquet cuts off blood supply and can cost the limb.</div>
-    <div class="msg lang"><div class="lab">Marathi · spoken by Polly</div><span class="deva">त्याला शांत ठेवा. काहीही घट्ट बांधू नका, वैद्यकडे जाऊ नका. आता अँटीव्हेनॉमसह रुग्णालयात न्या. 108.</span></div>
+    <div class="msg alert"><div class="lab">⚠ myth caught</div>Stop the suction now. It does not remove venom and it harms both of them. The swallowing trouble is a neurotoxic danger sign.</div>
+    <div class="msg lang"><div class="lab">Telugu · spoken by Polly</div><span class="telu">ఆపండి. విషాన్ని నోటితో పీల్చవద్దు. అతన్ని కదలకుండా ఉంచండి, ఏమీ తాగించవద్దు, ఇప్పుడే యాంటీవెనమ్ ఉన్న ఆసుపత్రికి తీసుకెళ్లండి. 108.</span></div>
   </div>
 </div>
 
-<!-- CASE 2 -->
+<!-- CASE B -->
 <div class="scene case" id="case2">
-  <div class="eyebrow">Use case 2 · the cut-and-drain myth</div>
-  <h1>Any language, anywhere.</h1>
+  <div class="eyebrow">A farm worker, hours from a clinic · the ice-and-wait myth</div>
+  <h1>Ends the wait-and-see that costs limbs.</h1>
   <div class="phone">
     <div class="bar"><span class="d"></span> SerpAID · emergency mode</div>
-    <div class="msg user">A farmer was bitten in the field. Can I cut the wound to drain the venom? It will not stop bleeding.</div>
-    <span class="sev">SEVERITY: EMERGENCY</span>
-    <div class="msg alert"><div class="lab">⚠ myth caught</div>Do not cut the wound. WHO advises against incision. It causes bleeding and infection and removes no venom.</div>
-    <div class="msg lang"><div class="lab">Swahili · spoken by Polly</div>Usikate jeraha. Endelea bado, ondoa vitu vigumu, na ufikie hospitali na antivenom sasa. Dharura: 999.</div>
+    <div class="msg user">A worker was bitten two hours ago in the fields. We packed it in ice and are waiting to see if it gets worse. The leg is badly swollen.</div>
+    <span class="sev urgent">SEVERITY: URGENT</span>
+    <div class="msg alert"><div class="lab">⚠ myth caught</div>Do not wait, and do not use ice. Remove it. Severe swelling means go now, by vehicle, to a hospital with antivenom.</div>
+    <div class="msg lang"><div class="lab">Portuguese · spoken by Polly</div>Nao espere e nao use gelo. Remova-o. Inchaco severo significa ir agora, de carro, a um hospital com antiveneno. Emergencia: 192.</div>
   </div>
 </div>
 
-<!-- CASE 3 -->
+<!-- CASE C -->
 <div class="scene case" id="case3">
-  <div class="eyebrow">Use case 3 · no myth, still urgent</div>
-  <h1>It never says you are safe.</h1>
+  <div class="eyebrow">A pregnant woman, bleeding · no myth, still urgent</div>
+  <h1>Calm, correct, in her own language.</h1>
   <div class="phone">
     <div class="bar"><span class="d"></span> SerpAID · emergency mode</div>
-    <div class="msg user">My child was bitten on the hand a few minutes ago. What do we do?</div>
-    <span class="sev urgent">SEVERITY: URGENT</span>
-    <div class="msg lang"><div class="lab">Hindi · spoken by Polly</div><span class="deva">शांत रहें। हाथ को स्थिर रखें और दिल के स्तर से नीचे रखें। अंगूठियां हटा दें। अब एंटीवेनम वाले अस्पताल में जाएं। 108।</span></div>
+    <div class="msg user">My wife is pregnant and was bitten near the river. The wound keeps bleeding and we are very scared. What do we do?</div>
+    <span class="sev">SEVERITY: EMERGENCY</span>
+    <div class="msg lang"><div class="lab">Bengali · spoken by Polly</div><span class="beng">শান্ত থাকুন। তাকে শুইয়ে স্থির রাখুন। কিছু বাঁধবেন না বা কাটবেন না। রক্ত বন্ধ না হওয়া গুরুতর, এখনই যান্টিভেনম থাকা হাসপাতালে যান। 108.</span></div>
   </div>
 </div>
 
@@ -150,23 +152,12 @@ api.py · deploy.py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Amazon Bedrock AgentCore
   <div class="thanks">SerpAID · WHO-grounded snakebite first aid · built by Sarvar Nadaf</div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// shared serpent-curve background (static render; the scene switching is driven by Playwright)
+// static luxury ambient background (no animation), matches the website
 const c=document.getElementById('c');
-const r=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true});r.setPixelRatio(2);r.setSize(1280,720);
-const sc=new THREE.Scene();sc.fog=new THREE.FogExp2(0x070b0a,.05);
-const cam=new THREE.PerspectiveCamera(60,1280/720,.1,100);cam.position.set(0,0,18);
-const N=3200,pos=new Float32Array(N*3),seed=new Float32Array(N);for(let i=0;i<N;i++)seed[i]=Math.random();
-const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));
-const cv=document.createElement('canvas');cv.width=cv.height=64;const gx=cv.getContext('2d');
-const gr=gx.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(140,255,215,1)');gr.addColorStop(.4,'rgba(56,255,176,.5)');gr.addColorStop(1,'rgba(56,255,176,0)');gx.fillStyle=gr;gx.fillRect(0,0,64,64);
-const tx=new THREE.Texture(cv);tx.needsUpdate=true;
-const m=new THREE.PointsMaterial({size:.5,map:tx,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,color:0x38ffb0,opacity:.85});
-const pts=new THREE.Points(g,m);sc.add(pts);
-let T=0;function frame(){T+=0.004;for(let i=0;i<N;i++){const u=seed[i],j=(seed[i]-.5);
-  pos[i*3]=(u-.5)*44;pos[i*3+1]=Math.sin(u*7.5+T)*3.2+Math.sin(u*3.1-T*.6)*1.6+j*2+2.5;pos[i*3+2]=Math.cos(u*5.2+T*.8)*2.5+j*1.8;}
-  g.attributes.position.needsUpdate=true;pts.rotation.z=-.05;r.render(sc,cam);requestAnimationFrame(frame);}frame();
+c.style.background="radial-gradient(60% 50% at 12% 18%, rgba(56,255,176,.12), transparent 60%),"
+  +"radial-gradient(55% 45% at 88% 72%, rgba(15,174,121,.10), transparent 62%),"
+  +"radial-gradient(40% 40% at 72% 10%, rgba(56,255,176,.06), transparent 60%)";
 // scene switcher
 window.showScene=(id)=>{document.querySelectorAll('.scene').forEach(s=>s.classList.remove('on'));
   const el=document.getElementById(id);if(el)el.classList.add('on');
