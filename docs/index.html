@@ -45,6 +45,11 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
     background:radial-gradient(130% 90% at 50% 0%,transparent 55%,rgba(0,0,0,.6) 100%)}
+  /* cursor spotlight: a soft antivenom glow that follows the pointer */
+  .spotlight{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.6;mix-blend-mode:screen;
+    background:radial-gradient(360px circle at var(--mx,50%) var(--my,30%),rgba(56,255,176,.10),transparent 60%);
+    transition:opacity .6s ease}
+  @media(hover:none){.spotlight{display:none}}
 
   main{position:relative;z-index:2}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--space-3)}
@@ -66,6 +71,10 @@
   /* hero */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
     padding:140px 0 90px;position:relative}
+  /* soft ambient glow behind the hero headline for depth */
+  .hero::before{content:"";position:absolute;left:-10%;top:28%;width:60%;height:50%;z-index:-1;
+    background:radial-gradient(circle,rgba(56,255,176,.10),transparent 70%);filter:blur(40px);pointer-events:none}
+  .hero h1 .em{font-style:italic;color:var(--venom);text-shadow:0 0 44px rgba(56,255,176,.35)}
   .kicker{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:.28em;
     text-transform:uppercase;color:var(--venom);margin-bottom:26px;opacity:0}
   .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--venom);
@@ -75,12 +84,24 @@
   .hero h1 .em{font-style:italic;color:var(--venom)}
   .hero p.lede{font-size:clamp(17px,2.2vw,22px);color:var(--muted);max-width:60ch;font-weight:300}
   .hero .cta{margin-top:44px;display:flex;gap:16px;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;
-    font-weight:500;font-size:15px;transition:transform .3s var(--ease),box-shadow .3s,background .3s;will-change:transform}
-  .btn-primary{background:var(--venom);color:#05231a;box-shadow:0 10px 40px -10px var(--venom-deep)}
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 50px -12px var(--venom-deep)}
-  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
-  .btn-ghost:hover{border-color:var(--venom);color:var(--venom)}
+  .btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:15px 20px 15px 28px;border-radius:999px;
+    font-weight:500;font-size:15px;overflow:hidden;
+    transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .4s;will-change:transform}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:linear-gradient(180deg,#5affc0,var(--venom));color:#05231a;
+    box-shadow:0 10px 40px -10px var(--venom-deep),inset 0 1px 0 rgba(255,255,255,.5)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 60px -14px var(--venom-deep),inset 0 1px 0 rgba(255,255,255,.5)}
+  /* sheen sweep */
+  .btn-primary::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);
+    animation:sheen 4.5s var(--ease) infinite}
+  @keyframes sheen{0%,60%{left:-120%}80%,100%{left:160%}}
+  .btn-arrow{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;
+    background:rgba(5,35,26,.16);transition:transform .4s var(--ease),background .4s}
+  .btn-arrow svg{width:16px;height:16px}
+  .btn-primary:hover .btn-arrow{transform:translateX(4px);background:rgba(5,35,26,.28)}
+  .btn-ghost{padding:15px 28px;border:1px solid var(--line);color:var(--ink);background:rgba(255,255,255,.015)}
+  .btn-ghost:hover{border-color:var(--venom);color:var(--venom);transform:translateY(-3px)}
 
   .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
   .reveal.in{opacity:1;transform:none}
@@ -161,6 +182,7 @@
 <body>
 <canvas id="bg-canvas"></canvas>
 <div class="grain"></div>
+<div class="spotlight" id="spotlight"></div>
 <div class="vignette"></div>
 
 <nav id="nav">
@@ -175,7 +197,7 @@
     <a href="#demo">Live demo</a>
     <a href="#build">Built with</a>
   </div>
-  <a href="#demo" class="btn btn-ghost" style="padding:10px 20px">Try it</a>
+  <a href="#demo" class="btn btn-ghost" data-magnetic style="padding:10px 20px">Try it</a>
 </nav>
 
 <main>
@@ -185,8 +207,11 @@
     <h1 id="h1">In a snakebite, the first <span class="em">sixty seconds</span> decide who lives.</h1>
     <p class="lede" id="lede">SerpAID is an AI agent that coaches the terrified person standing over the victim through exactly the right actions, in their own language, before the ambulance ever arrives. Built with the Strands Agents SDK and Amazon Nova, grounded strictly in the World Health Organization protocol.</p>
     <div class="cta" id="cta">
-      <a href="#demo" class="btn btn-primary">See it save a life →</a>
-      <a href="#how" class="btn btn-ghost">How it works</a>
+      <a href="#demo" class="btn btn-primary" data-magnetic>
+        See it save a life
+        <span class="btn-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="#how" class="btn btn-ghost" data-magnetic>How it works</a>
     </div>
 
     <div class="stats reveal">

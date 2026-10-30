@@ -27,4 +27,31 @@
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // cursor spotlight (skipped on reduced motion / touch)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const spot = document.getElementById('spotlight');
+  if (spot && !reduce) {
+    window.addEventListener('pointermove', (e) => {
+      spot.style.setProperty('--mx', e.clientX + 'px');
+      spot.style.setProperty('--my', e.clientY + 'px');
+    }, { passive: true });
+  }
+
+  // magnetic buttons: lean toward the pointer, spring back on leave
+  if (!reduce) {
+    document.querySelectorAll('[data-magnetic]').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        el.style.transition = 'transform .08s linear';
+        el.style.transform = `translate(${x * 0.18}px, ${y * 0.3 - 3}px)`;
+      });
+      el.addEventListener('pointerleave', () => {
+        el.style.transition = 'transform .5s cubic-bezier(.22,.61,.36,1)';
+        el.style.transform = 'translate(0,0)';
+      });
+    });
+  }
 })();
