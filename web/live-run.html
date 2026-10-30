@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SerpAID live run</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#070b0a;--ink:#d7e6e0;--venom:#38ffb0;--amber:#ffc24b;--danger:#ff7a7a;--muted:#7f968d;--line:rgba(120,170,155,.16)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'JetBrains Mono',monospace;height:100vh;overflow:hidden;
+    display:flex;align-items:center;justify-content:center}
+  .frame{width:min(1120px,94vw);height:min(660px,90vh);background:#0a1512;border:1px solid var(--line);
+    border-radius:16px;box-shadow:0 40px 120px -40px #000;overflow:hidden;display:flex;flex-direction:column}
+  .bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--line);background:#0b1210}
+  .bar .d{width:11px;height:11px;border-radius:50%}
+  .bar .r{background:#ff5f56}.bar .y{background:#ffbd2e}.bar .g{background:#27c93f}
+  .bar .t{margin-left:12px;color:var(--muted);font-size:13px}
+  .body{padding:22px 26px;overflow:hidden;font-size:15.5px;line-height:1.72;flex:1}
+  .line{white-space:pre-wrap;word-break:break-word}
+  .prompt{color:var(--venom)}
+  .cmd{color:var(--ink)}
+  .agent{color:var(--muted)}
+  .agent b{color:var(--venom);font-weight:600}
+  .alert{color:var(--danger)}
+  .ok{color:var(--venom)}
+  .mr{color:#bfe9d9;font-family:'Inter',sans-serif;font-size:15px}
+  .cursor{display:inline-block;width:9px;height:17px;background:var(--venom);vertical-align:-3px;animation:b 1s steps(1) infinite}
+  @keyframes b{50%{opacity:0}}
+  .tag{color:var(--muted);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span>
+    <span class="t">serpaid, python -m serpaid.graph, live on Amazon Nova</span></div>
+  <div class="body" id="out"></div>
+</div>
+<script>
+const steps = [
+  {t:'cmd', s:'$ python -m serpaid.graph', d:600},
+  {t:'prompt', s:'caller> A snake bit my cousin on the ankle near Pune. Should I tie a tight\n        cloth and take him to the village healer? His eyelids feel heavy. (mr, IN)', d:900},
+  {t:'tag', s:'\nintake agent, amazon nova', d:500},
+  {t:'agent', s:'  calling check_myth("tie a tight cloth ... village healer") ...', d:600},
+  {t:'alert', s:'  harmful action detected: tourniquet, traditional healer', d:700},
+  {t:'tag', s:'\nprotocol agent, deterministic WHO engine', d:500},
+  {t:'agent', s:'  calling assess_snakebite(signs=[drooping_eyelids, trouble_breathing]) ...', d:600},
+  {t:'ok', s:'  severity = EMERGENCY  (critical neurotoxic sign)', d:600},
+  {t:'agent', s:'  steps = [calm+still, immobilise, remove constrictions, transport, observe]', d:500},
+  {t:'agent', s:'  guardrail = no tourniquet / cut / suck / ice in advice  [PASS]', d:600},
+  {t:'tag', s:'\ncommunicator agent, amazon translate + polly', d:500},
+  {t:'agent', s:'  myth correction + 5 WHO steps + emergency 108, then translate(mr) ...', d:700},
+  {t:'mr', s:'  त्याला शांत ठेवा. काहीही घट्ट बांधू नका, वैद्यकडे जाऊ नका. आता\n  अँटीव्हेनॉमसह रुग्णालयात वाहनाने न्या. आपत्कालीन क्रमांक: 108.', d:900},
+  {t:'ok', s:'\nok: grounded in WHO protocol, model decided nothing medical, 2.1s', d:400},
+];
+const out = document.getElementById('out');
+let i = 0;
+function typeLine(txt, cls, done){
+  const div = document.createElement('div'); div.className = 'line '+cls; out.appendChild(div);
+  const cur = document.createElement('span'); cur.className='cursor';
+  let j = 0;
+  const speed = 9;
+  (function tick(){
+    div.textContent = txt.slice(0, j);
+    div.appendChild(cur);
+    if(j < txt.length){ j++; setTimeout(tick, speed); }
+    else { cur.remove(); done(); }
+  })();
+}
+function run(){
+  if(i >= steps.length) return;
+  const st = steps[i++];
+  typeLine(st.s, st.t, ()=> setTimeout(run, st.d));
+}
+window.onload = ()=> setTimeout(run, 500);
+</script>
+</body>
+</html>

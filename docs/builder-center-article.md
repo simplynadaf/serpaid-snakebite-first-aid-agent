@@ -34,7 +34,15 @@ A caller writes: a snake bit my cousin on the ankle near Pune, should I tie a ti
 
 ## What I would improve next
 
-Region-aware first aid is the natural next step, since the correct technique differs between snake families. I would add a curated, country-level directory of facilities that stock antivenom so the routing is exact rather than a safe fallback to the emergency number. And I would run a live pilot with a community health program to measure the one number that matters: time from bite to antivenom.
+I want to be honest about where the current build stops, because naming the limits is part of building something trustworthy in health.
+
+**Myth detection is keyword based and runs on English.** The deterministic engine catches a harmful action by matching WHO myth triggers in the caller's words. That is fast and transparent, but a caller who writes the same intent in Hindi or Marathi may not trigger it yet. The fix is to translate the incoming message to English before the myth scan, so the safety net works regardless of input language. I would add that next.
+
+**First aid is currently one universal step set.** The correct pre-hospital technique can differ by snake family, for example pressure immobilisation for some neurotoxic elapid bites versus not for tissue-destroying viper bites. SerpAID gives the safe, universal WHO core today. I would extend the engine to branch on region and reported effects, grounded in the regional annexes of the WHO guidance, without ever letting the model make that call.
+
+**Nearest care is a safe fallback, not live routing.** There is no clean global dataset of which facilities actually stock antivenom, so the locate tool returns the correct local emergency number and asks the caller to request the nearest hospital with antivenom. I would build a curated, country-level directory of antivenom-stocking facilities so the routing becomes exact.
+
+**And the measurement that matters.** The agent's safety today is proven by a test suite. The real proof is a field pilot with a community health program measuring the one number that decides outcomes: time from bite to antivenom. That is the metric I would instrument next.
 
 ## Honest limits
 

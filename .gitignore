@@ -8,3 +8,6 @@ demo/frame-check*.png
 assets/audio/*.mp3
 assets/audio/list.txt
 .DS_Store
+demo/raw-liverun/
+demo/_*.mp4
+demo/*check*.png

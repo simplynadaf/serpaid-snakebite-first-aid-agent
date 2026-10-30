@@ -1,0 +1,14 @@
+{
+  "severity": "emergency",
+  "myth": "Tie a tight tourniquet above the bite to stop the venom.",
+  "correction": "Do not apply a tight tourniquet. WHO actively discourages it. Tourniquets do not stop venom, they cut off blood supply and can cost the person their limb. If a tight band is already on, leave it for trained staff to release slowly at the hospital.",
+  "emergency": "108 (ambulance) or 112",
+  "steps": [
+    "Keep the person calm and still",
+    "Immobilise the whole body, especially the bitten limb",
+    "Remove rings, bangles, watches and tight clothing",
+    "Transport to a health facility with antivenom now",
+    "Watch breathing and consciousness on the way"
+  ],
+  "marathi": "त्याला शांत आणि शांत ठेवा. काहीही घट्ट बांधू नका आणि उपचाराकडे जाऊ नका. त्याला आता अँटीव्हेनॉमसह रुग्णालयात वाहनाने घेऊन आपत्कालीन क्रमांक: 108"
+}
