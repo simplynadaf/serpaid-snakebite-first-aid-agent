@@ -1,4 +1,4 @@
-# SerpAID — LinkedIn promo post
+# SerpAID LinkedIn promo post
 
 Rules applied: number-first hook, no link in the body (first comment only), zero em
 dashes, under ~1300 chars, Unicode bold on the hook and key phrases, one clear topic,
