@@ -3,3 +3,4 @@ strands-agents-tools
 boto3>=1.34.0
 bedrock-agentcore
 pytest
+aws-opentelemetry-distro

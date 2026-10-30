@@ -78,6 +78,21 @@ Deploy to a live AgentCore endpoint:
 python deploy.py   # prints the agent ARN
 ```
 
+## Live deployment (proven)
+
+SerpAID is deployed and running on **Amazon Bedrock AgentCore Runtime**:
+
+```
+arn:aws:bedrock-agentcore:us-east-1:175662053988:runtime/serpaid-G2FMzKGEoy
+```
+
+A live invocation of the hosted endpoint is captured in
+`demo/live-agentcore-invocation.json`. In it, the running agent catches the
+tourniquet and the village healer as harmful, grades the drooping eyelids as
+serious, gives the WHO first-aid steps in order, and delivers the whole plan in
+Marathi with the 108 emergency number. CloudWatch logs and OpenTelemetry traces
+are enabled for observability.
+
 ## Repository layout
 
 ```
