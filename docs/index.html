@@ -8,7 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- SerpAID site is a fully static showcase. It makes no AWS, Bedrock, Translate, Polly, or API
+     calls at runtime, so hosting it costs nothing. The demo transcript is baked sample data.
+     The real agent runs separately on the AgentCore endpoint, which you invoke, not this page. -->
 <style>
   :root{
     --bg:#070b0a;
@@ -295,9 +297,9 @@
 
   <!-- DEMO -->
   <section id="demo" class="wrap">
-    <div class="eyebrow reveal">Live demo</div>
+    <div class="eyebrow reveal">Sample exchange</div>
     <h2 class="section-title reveal">A real exchange, grounded and translated.</h2>
-    <p class="section-sub reveal">This is the actual agent output. Notice it catches the tourniquet and the healer, escalates the drooping eyelids, and answers in Marathi.</p>
+    <p class="section-sub reveal">A saved example of the agent's actual output. It catches the tourniquet and the healer, escalates the drooping eyelids, and answers in Marathi. This page is a static showcase, so it makes no calls and costs nothing to host. The running agent lives on the AgentCore endpoint.</p>
     <div class="phone reveal">
       <div class="bar"><span class="d"></span> SerpAID · emergency mode</div>
       <div class="msg user">A snake bit my cousin on the ankle near Pune. Should I tie a tight cloth above it and take him to the village healer? His eyelids feel heavy.</div>
