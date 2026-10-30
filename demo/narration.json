@@ -1,0 +1,35 @@
+{
+  "voice": "Ruth",
+  "engine": "long-form",
+  "note": "Narration for the SerpAID demo video. No em dashes anywhere. Timed to sit under 3 minutes.",
+  "segments": [
+    {
+      "id": "hook",
+      "text": "Every year, more than five million people are bitten by snakes. Up to one hundred and thirty eight thousand of them die, and most of those deaths are preventable. The victims are almost always farmers and children in poor rural communities."
+    },
+    {
+      "id": "story",
+      "text": "This stopped being a statistic for me the day a snake bit my cousin. The people around us meant well, but nobody knew what to do. They shouted to tie a cloth tight, and to rush him to a local healer. We spent the minutes that mattered most on the very things that make it worse. He was lucky. Tens of thousands of people every year are not."
+    },
+    {
+      "id": "idea",
+      "text": "So I built SerpAID. It is an AI agent that coaches the frightened person standing over the victim through exactly the right actions, in their own language, in the first minutes that decide everything. It is built with the Strands Agents SDK and Amazon Nova, and it is grounded strictly in the World Health Organization protocol."
+    },
+    {
+      "id": "how",
+      "text": "SerpAID is a Strands multi agent graph with a fixed order, so it behaves the same way every time. The intake agent understands the panic. The protocol agent calls a deterministic rule engine that decides severity and the correct first aid steps. The communicator agent speaks the plan calmly and translates it into the caller's mother tongue."
+    },
+    {
+      "id": "safety",
+      "text": "Here is the important part. The language model never decides anything medical. A tested Python engine owns every instruction. It can never tell you to apply a tourniquet, to cut the wound, or to suck the venom. The model only phrases and translates what the engine returns."
+    },
+    {
+      "id": "demo",
+      "text": "Watch it work. A caller says a snake bit my cousin on the ankle, should I tie a tight cloth and go to the healer, his eyelids feel heavy. SerpAID instantly catches the tourniquet and the healer as dangerous. It gives the World Health Organization steps in order. It flags the drooping eyelids as an emergency. And it delivers the whole thing in Marathi, spoken aloud, ending with the local ambulance number."
+    },
+    {
+      "id": "close",
+      "text": "SerpAID does not replace a hospital. Every path it gives ends in one instruction. Reach antivenom now. It is the calm, correct voice I wish we had the day my cousin was bitten. For a neglected disease that kills the world's poorest, that voice can be the difference between a scare and a funeral."
+    }
+  ]
+}

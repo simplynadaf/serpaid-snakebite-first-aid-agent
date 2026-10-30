@@ -1,0 +1,129 @@
+{
+  "_source": "World Health Organization snakebite envenoming guidance and WHO SEARO snakebite first-aid webinar materials (David Williams, Ravikar Ralph, July 2025), WHO Control of Neglected Tropical Diseases snakebite treatment page, and ANZCOR First Aid Guideline 9.4.1. Every instruction below is drawn from these public protocols. SerpAID reproduces the protocol. It never improvises a medical instruction.",
+  "_disclaimer": "SerpAID gives first-aid guidance grounded in WHO protocol. It does not diagnose the snake, does not identify venom type, and does not replace a hospital. Every pathway ends in reach a health facility with antivenom now.",
+  "burden": {
+    "bites_per_year": "5.4 million",
+    "envenomings_per_year": "1.8 to 2.7 million",
+    "deaths_per_year_low": 81410,
+    "deaths_per_year_high": 137880,
+    "most_affected": "Agricultural workers and children in poor rural communities of Africa, Asia and Latin America",
+    "note_children": "Children often suffer more severe effects and more quickly than adults due to smaller body mass",
+    "who_status": "WHO highest-priority Neglected Tropical Disease since June 2017; roadmap goal to halve death and disability by 2030"
+  },
+  "do_steps": [
+    {
+      "id": "reassure",
+      "order": 1,
+      "title": "Keep the person calm and still",
+      "detail": "Reassure the person. Most snakes are not venomous and even a venomous bite is treatable. Panic and movement speed the spread of venom.",
+      "source": "ANZCOR 9.4.1; WHO SEARO first-aid"
+    },
+    {
+      "id": "immobilise",
+      "order": 2,
+      "title": "Immobilise the whole body, especially the bitten limb",
+      "detail": "Lay the person down. Keep the bitten limb still and at or below heart level. Use a splint or sling if available. Do not let the person walk if it can be avoided.",
+      "source": "WHO SEARO first-aid; ANZCOR 9.4.1"
+    },
+    {
+      "id": "remove_constrictions",
+      "order": 3,
+      "title": "Remove rings, bangles, watches and tight clothing",
+      "detail": "Swelling can follow quickly. Remove anything tight near the bite before the limb swells.",
+      "source": "WHO SEARO first-aid"
+    },
+    {
+      "id": "transport",
+      "order": 4,
+      "title": "Transport to a health facility with antivenom now",
+      "detail": "This is the only real treatment. Move the person to the nearest facility that stocks antivenom as fast as safely possible, by vehicle, not on foot. Call local emergency services.",
+      "source": "WHO Control of NTDs snakebite treatment"
+    },
+    {
+      "id": "observe",
+      "order": 5,
+      "title": "Watch breathing and consciousness on the way",
+      "detail": "Keep watching for the danger signs below. If breathing becomes difficult, keep the airway clear and keep moving toward care.",
+      "source": "WHO SEARO flashcards"
+    }
+  ],
+  "danger_signs": [
+    {"id": "drooping_eyelids", "label": "Drooping eyelids or blurred or double vision", "system": "neurotoxic"},
+    {"id": "trouble_breathing", "label": "Difficulty breathing or shortness of breath", "system": "neurotoxic", "critical": true},
+    {"id": "trouble_swallowing", "label": "Difficulty swallowing or speaking, or drooling", "system": "neurotoxic", "critical": true},
+    {"id": "limb_weakness", "label": "Weakness, floppiness or paralysis spreading in the body", "system": "neurotoxic", "critical": true},
+    {"id": "persistent_bleeding", "label": "Bleeding from the gums, nose, wound or in urine that does not stop", "system": "haemotoxic", "critical": true},
+    {"id": "severe_swelling", "label": "Rapidly spreading severe swelling of the limb", "system": "cytotoxic"},
+    {"id": "drowsy_collapse", "label": "Drowsiness, confusion, fainting or collapse", "system": "systemic", "critical": true},
+    {"id": "little_urine", "label": "Little or no urine, or very dark urine", "system": "haemotoxic"}
+  ],
+  "myths": [
+    {
+      "id": "tourniquet",
+      "triggers": ["tourniquet", "tie", "tied", "tying", "rope", "band", "belt", "bandage tight", "cloth tight", "cut off blood", "stop blood"],
+      "myth": "Tie a tight tourniquet above the bite to stop the venom.",
+      "correction": "Do not apply a tight tourniquet. WHO actively discourages it. Tourniquets do not stop venom, they cut off blood supply and can cost the person their limb. If a tight band is already on, leave it for trained staff to release slowly at the hospital.",
+      "source": "WHO SEARO first-aid (David Williams, July 2025)"
+    },
+    {
+      "id": "cut",
+      "triggers": ["cut", "cutting", "incision", "slice", "blade", "knife", "open the wound"],
+      "myth": "Cut the wound open to let the venom out.",
+      "correction": "Do not cut the wound. WHO advises against incision. Cutting causes bleeding, infection and worse damage, and removes no meaningful venom.",
+      "source": "WHO Control of NTDs snakebite treatment"
+    },
+    {
+      "id": "suck",
+      "triggers": ["suck", "sucking", "mouth", "suction", "extractor", "pump out"],
+      "myth": "Suck the venom out by mouth or with a suction pump.",
+      "correction": "Do not suck or use a suction device. WHO advises against suction. It does not remove venom and can harm the rescuer and the wound.",
+      "source": "WHO Control of NTDs snakebite treatment"
+    },
+    {
+      "id": "black_stone",
+      "triggers": ["black stone", "stone", "snake stone", "herbs", "herb", "poultice", "paste", "chili", "cow dung", "traditional", "healer", "quack", "ojha", "tantrik"],
+      "myth": "Apply a black stone, herbs or a healer's paste, or go to a traditional healer first.",
+      "correction": "Do not apply black stones, herbs or pastes, and do not go to a traditional healer first. WHO advises against these. They waste the time that antivenom needs. Go straight to a hospital with antivenom.",
+      "source": "WHO Control of NTDs snakebite treatment"
+    },
+    {
+      "id": "ice",
+      "triggers": ["ice", "freeze", "cold pack", "cooling"],
+      "myth": "Pack the bite in ice.",
+      "correction": "Do not apply ice. It does not slow venom and can cause cold injury to the tissue.",
+      "source": "WHO SEARO first-aid"
+    },
+    {
+      "id": "electric",
+      "triggers": ["electric", "shock", "battery", "current"],
+      "myth": "Give an electric shock to neutralise the venom.",
+      "correction": "Do not use electric shock. It has no effect on venom and can injure the heart.",
+      "source": "WHO SEARO first-aid"
+    },
+    {
+      "id": "alcohol",
+      "triggers": ["alcohol", "drink", "liquor", "whisky", "rum"],
+      "myth": "Give alcohol to calm the person or dull the pain.",
+      "correction": "Do not give alcohol. It can speed venom absorption and hide danger signs. Give nothing by mouth except small sips of water if the person can swallow safely.",
+      "source": "WHO SEARO first-aid"
+    },
+    {
+      "id": "catch_snake",
+      "triggers": ["catch", "kill the snake", "chase", "capture", "find the snake", "bring the snake"],
+      "myth": "Catch or kill the snake to show the doctor.",
+      "correction": "Do not chase, catch or kill the snake. A second bite is a real risk and treatment does not need the snake. A phone photo from a safe distance is enough if it is truly safe.",
+      "source": "WHO SEARO first-aid"
+    }
+  ],
+  "emergency_numbers_by_region": {
+    "default": "your local emergency number",
+    "IN": "108 (ambulance) or 112",
+    "US": "911",
+    "KE": "999 or 112",
+    "NG": "112",
+    "BR": "192 (SAMU)",
+    "AU": "000",
+    "LK": "1990 (Suwa Seriya)",
+    "ZA": "10177"
+  }
+}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SerpAID · the sixty seconds that save a life after a snakebite</title>
+<meta name="description" content="SerpAID is a WHO-grounded, multilingual snakebite first-aid agent built with the Strands Agents SDK and Amazon Nova. It coaches the person beside the victim through the right actions, in their own language, in the minutes that decide everything." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  :root{
+    --bg:#070b0a;
+    --bg-2:#0b1210;
+    --ink:#eef3f1;
+    --muted:#9fb3ac;
+    --faint:#6b7f78;
+    --venom:#38ffb0;      /* antivenom green */
+    --venom-deep:#0fae79;
+    --amber:#ffc24b;      /* warning */
+    --danger:#ff5d5d;
+    --line:rgba(120,170,155,.14);
+    --glass:rgba(16,26,23,.55);
+    --radius:20px;
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --space-1:8px;--space-2:16px;--space-3:24px;--space-4:40px;--space-5:64px;--space-6:96px;--space-7:140px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--venom);color:#05231a}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:-.015em}
+  a{color:inherit;text-decoration:none}
+
+  /* three.js canvas lives behind everything */
+  #bg-canvas{position:fixed;inset:0;z-index:0;opacity:.9}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(130% 90% at 50% 0%,transparent 55%,rgba(0,0,0,.6) 100%)}
+
+  main{position:relative;z-index:2}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--space-3)}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(16px,4vw,48px);
+    backdrop-filter:blur(14px) saturate(140%);
+    background:linear-gradient(180deg,rgba(7,11,10,.7),transparent);
+    transition:background .4s var(--ease)}
+  nav.scrolled{background:rgba(7,11,10,.82);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.02em}
+  .brand .mark{width:26px;height:26px}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .3s}.nav-links a:hover{color:var(--venom)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* hero */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:140px 0 90px;position:relative}
+  .kicker{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--venom);margin-bottom:26px;opacity:0}
+  .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--venom);
+    box-shadow:0 0 14px var(--venom);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+  .hero h1{font-size:clamp(42px,8vw,98px);max-width:16ch;margin-bottom:28px}
+  .hero h1 .em{font-style:italic;color:var(--venom)}
+  .hero p.lede{font-size:clamp(17px,2.2vw,22px);color:var(--muted);max-width:60ch;font-weight:300}
+  .hero .cta{margin-top:44px;display:flex;gap:16px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;
+    font-weight:500;font-size:15px;transition:transform .3s var(--ease),box-shadow .3s,background .3s;will-change:transform}
+  .btn-primary{background:var(--venom);color:#05231a;box-shadow:0 10px 40px -10px var(--venom-deep)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 50px -12px var(--venom-deep)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--venom);color:var(--venom)}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* stat band */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);
+    padding:var(--space-5) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:var(--space-6)}
+  .stat .n{font-family:'Fraunces',serif;font-size:clamp(30px,4.5vw,52px);color:var(--ink)}
+  .stat .n b{color:var(--venom);font-weight:500}
+  .stat .l{font-size:13.5px;color:var(--faint);margin-top:6px;letter-spacing:.01em}
+  @media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr);gap:var(--space-4)}}
+
+  section{padding:var(--space-7) 0;scroll-margin-top:90px}
+  .eyebrow{font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--venom);margin-bottom:18px}
+  .section-title{font-size:clamp(30px,5vw,58px);max-width:18ch;margin-bottom:22px}
+  .section-sub{color:var(--muted);max-width:62ch;font-weight:300;font-size:clamp(16px,2vw,19px)}
+
+  /* story card */
+  .story{position:relative}
+  .story-card{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);
+    padding:clamp(28px,5vw,60px);backdrop-filter:blur(16px);position:relative;overflow:hidden}
+  .story-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(var(--venom),transparent)}
+  .story-card .q{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,3.4vw,34px);
+    line-height:1.32;color:var(--ink);max-width:28ch}
+  .story-card .by{margin-top:26px;color:var(--faint);font-size:14.5px;letter-spacing:.04em}
+
+  /* how it works - the graph */
+  .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin-top:var(--space-5)}
+  .node{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+    position:relative;transition:transform .5s var(--ease),border-color .5s}
+  .node:hover{transform:translateY(-6px);border-color:rgba(56,255,176,.4)}
+  .node .step{font-size:12px;letter-spacing:.2em;color:var(--venom);text-transform:uppercase}
+  .node h3{font-size:22px;margin:12px 0 10px}
+  .node p{color:var(--muted);font-size:14.5px;font-weight:300}
+  .node .tag{display:inline-block;margin-top:16px;font-size:12px;color:var(--faint);
+    border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+  .flow .arrow{display:none}
+  @media(max-width:860px){.flow{grid-template-columns:1fr}}
+
+  /* split: deterministic vs model */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);align-items:center;margin-top:var(--space-4)}
+  @media(max-width:860px){.split{grid-template-columns:1fr}}
+  .panel{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:30px}
+  .panel h3{font-size:20px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .panel.engine h3{color:var(--venom)}.panel.model h3{color:var(--amber)}
+  .panel ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .panel li{padding-left:24px;position:relative;color:var(--muted);font-size:15px;font-weight:300}
+  .panel li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:2px;background:var(--venom)}
+  .panel.model li::before{background:var(--amber)}
+
+  /* live demo transcript */
+  .phone{max-width:430px;margin:var(--space-5) auto 0;background:#0a1512;border:1px solid var(--line);
+    border-radius:34px;padding:22px;box-shadow:0 40px 120px -40px #000,inset 0 1px 0 rgba(255,255,255,.04)}
+  .phone .bar{display:flex;align-items:center;gap:8px;margin-bottom:16px;color:var(--faint);font-size:12px}
+  .phone .bar .d{width:9px;height:9px;border-radius:50%;background:var(--danger)}
+  .msg{margin:10px 0;padding:13px 16px;border-radius:16px;font-size:14.5px;max-width:86%;line-height:1.5}
+  .msg.user{background:#13211d;color:var(--ink);margin-left:auto;border-bottom-right-radius:5px}
+  .msg.bot{background:linear-gradient(180deg,rgba(56,255,176,.14),rgba(56,255,176,.06));
+    border:1px solid rgba(56,255,176,.22);color:var(--ink);border-bottom-left-radius:5px}
+  .msg.bot b{color:var(--venom)}
+  .msg.alert{background:rgba(255,93,93,.1);border:1px solid rgba(255,93,93,.3)}
+  .msg .mini{font-size:11.5px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+
+  /* tech badges */
+  .badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--space-4)}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--line);
+    border-radius:999px;padding:10px 18px;font-size:13.5px;color:var(--muted)}
+  .badge b{color:var(--ink);font-weight:500}
+
+  footer{border-top:1px solid var(--line);padding:var(--space-5) 0 var(--space-6);color:var(--faint);font-size:14px}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-4)}
+  .disclaimer{background:rgba(255,194,75,.07);border:1px solid rgba(255,194,75,.22);border-radius:14px;
+    padding:18px 22px;color:var(--muted);font-size:13.5px;max-width:70ch}
+  .disclaimer b{color:var(--amber)}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<nav id="nav">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 32 32" fill="none"><path d="M6 20c4-2 4-8 8-8s4 6 8 4 4-8 4-8" stroke="#38ffb0" stroke-width="2.4" stroke-linecap="round"/><circle cx="25" cy="9" r="1.6" fill="#38ffb0"/></svg>
+    SerpAID
+  </div>
+  <div class="nav-links">
+    <a href="#story">The story</a>
+    <a href="#how">How it works</a>
+    <a href="#safety">Safety</a>
+    <a href="#demo">Live demo</a>
+    <a href="#build">Built with</a>
+  </div>
+  <a href="#demo" class="btn btn-ghost" style="padding:10px 20px">Try it</a>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <header class="hero wrap">
+    <span class="kicker" id="k"><span class="dot"></span> WHO-grounded first aid for a neglected killer</span>
+    <h1 id="h1">In a snakebite, the first <span class="em">sixty seconds</span> decide who lives.</h1>
+    <p class="lede" id="lede">SerpAID is an AI agent that coaches the terrified person standing over the victim through exactly the right actions, in their own language, before the ambulance ever arrives. Built with the Strands Agents SDK and Amazon Nova, grounded strictly in the World Health Organization protocol.</p>
+    <div class="cta" id="cta">
+      <a href="#demo" class="btn btn-primary">See it save a life →</a>
+      <a href="#how" class="btn btn-ghost">How it works</a>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="n"><b>5.4M</b></div><div class="l">people bitten by snakes every year (WHO)</div></div>
+      <div class="stat"><div class="n"><b>138K</b></div><div class="l">deaths a year, most of them preventable</div></div>
+      <div class="stat"><div class="n"><b>3×</b></div><div class="l">as many left amputated or disabled</div></div>
+      <div class="stat"><div class="n"><b>#1</b></div><div class="l">victims: farmers and children, rural poor</div></div>
+    </div>
+  </header>
+
+  <!-- STORY -->
+  <section id="story" class="wrap story">
+    <div class="eyebrow reveal">Why I built this</div>
+    <h2 class="section-title reveal">It stopped being a statistic the day it was my cousin.</h2>
+    <div class="story-card reveal" style="margin-top:36px">
+      <p class="q">"When a snake bit my cousin, nobody around us knew what to do. People shouted to tie a cloth tight and rush to a local healer. We wasted the minutes that mattered most on exactly the things that make it worse. He was lucky. Tens of thousands of people every year are not. SerpAID is the calm voice I wish we had that day."</p>
+      <p class="by">The reason SerpAID exists</p>
+    </div>
+    <p class="section-sub reveal" style="margin-top:34px">The venom is only half the danger. The other half is what frightened, loving people do in the first minutes: a tourniquet, a cut, a suction, a detour to a healer. Every one of those wastes the time that antivenom needs. SerpAID replaces panic and folklore with the WHO protocol, spoken plainly, in the moment.</p>
+  </section>
+
+  <!-- HOW -->
+  <section id="how" class="wrap">
+    <div class="eyebrow reveal">How it works</div>
+    <h2 class="section-title reveal">Three specialists, one calm answer.</h2>
+    <p class="section-sub reveal">SerpAID is a Strands multi-agent graph. The order is fixed so it behaves the same way every single time: no improvisation when a life is on the line.</p>
+    <div class="flow">
+      <div class="node reveal">
+        <div class="step">01 · Intake</div>
+        <h3>Understands the panic</h3>
+        <p>Reads the frightened message: where in the world, what happened, the symptoms, and crucially what the rescuer is about to do. Catches a harmful action instantly.</p>
+        <span class="tag">Amazon Nova</span>
+      </div>
+      <div class="node reveal">
+        <div class="step">02 · Protocol</div>
+        <h3>Decides, deterministically</h3>
+        <p>A pure-Python WHO rule engine grades severity, selects the ordered first-aid steps, and corrects any myth. The model is never allowed to decide anything medical.</p>
+        <span class="tag">Deterministic engine · tested</span>
+      </div>
+      <div class="node reveal">
+        <div class="step">03 · Communicator</div>
+        <h3>Speaks their language</h3>
+        <p>Turns the plan into short, calm, spoken lines and translates them into the caller's mother tongue, ending with the local emergency number and reach antivenom now.</p>
+        <span class="tag">Amazon Translate · Polly voice</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section id="safety" class="wrap">
+    <div class="eyebrow reveal">Why you can trust it</div>
+    <h2 class="section-title reveal">The model never decides the dangerous part.</h2>
+    <p class="section-sub reveal">Grounding is not a feature here. It is the safety mechanism. Every medical instruction comes from the WHO protocol file through a tested rule engine. The language model only phrases and translates.</p>
+    <div class="split">
+      <div class="panel engine reveal">
+        <h3>The deterministic engine owns</h3>
+        <ul>
+          <li>Which first-aid steps to give, and their order</li>
+          <li>Whether a symptom is a critical emergency</li>
+          <li>Which myth the rescuer stated, and the exact correction</li>
+          <li>The guarantee: it can never output a tourniquet, cut, suction, or ice as advice</li>
+          <li>Proven by a test suite with a zero-harmful-action invariant</li>
+        </ul>
+      </div>
+      <div class="panel model reveal">
+        <h3>The model is only allowed to</h3>
+        <ul>
+          <li>Understand a messy, frightened, mixed-language message</li>
+          <li>Phrase the engine's plan as calm, short, spoken lines</li>
+          <li>Translate it into the caller's mother tongue</li>
+          <li>Never add, remove, or invent a medical step</li>
+          <li>Always end with reach a hospital with antivenom now</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo" class="wrap">
+    <div class="eyebrow reveal">Live demo</div>
+    <h2 class="section-title reveal">A real exchange, grounded and translated.</h2>
+    <p class="section-sub reveal">This is the actual agent output. Notice it catches the tourniquet and the healer, escalates the drooping eyelids, and answers in Marathi.</p>
+    <div class="phone reveal">
+      <div class="bar"><span class="d"></span> SerpAID · emergency mode</div>
+      <div class="msg user">A snake bit my cousin on the ankle near Pune. Should I tie a tight cloth above it and take him to the village healer? His eyelids feel heavy.</div>
+      <div class="msg bot alert">
+        <div class="mini">⚠ Myth caught</div>
+        <b>Do not</b> tie a tight cloth, and do not go to a healer first. A tourniquet cuts off blood supply and can cost the limb. These steps waste the time antivenom needs.
+      </div>
+      <div class="msg bot">
+        <div class="mini">WHO first aid</div>
+        1 · Keep him calm and still.<br/>
+        2 · Lay him down, keep the leg still and at or below heart level.<br/>
+        3 · Remove anklets, rings, anything tight before swelling.<br/>
+        4 · Carry him by vehicle to a hospital with antivenom now, not on foot.<br/>
+        5 · Watch his breathing on the way.
+      </div>
+      <div class="msg bot">
+        <div class="mini">Marathi · spoken by Polly</div>
+        शांत रहा. काहीही घट्ट बांधू नका. आता अँटीव्हेनॉमसह रुग्णालयात जा. आपातकालीन नंबर: 108.
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT WITH -->
+  <section id="build" class="wrap">
+    <div class="eyebrow reveal">Built with</div>
+    <h2 class="section-title reveal">A production harness, not a prompt.</h2>
+    <p class="section-sub reveal">SerpAID controls the loop, the tools, the guardrails, and the deployment end to end.</p>
+    <div class="badges reveal">
+      <span class="badge"><b>Strands Agents SDK</b> · multi-agent graph</span>
+      <span class="badge"><b>Amazon Nova Pro</b> · reasoning and language</span>
+      <span class="badge"><b>Amazon Translate</b> · mother-tongue output</span>
+      <span class="badge"><b>Amazon Polly</b> · spoken guidance</span>
+      <span class="badge"><b>Amazon Location Service</b> · nearest care</span>
+      <span class="badge"><b>Bedrock AgentCore</b> · live serverless runtime</span>
+    </div>
+    <div class="disclaimer reveal" style="margin-top:40px">
+      <b>Important.</b> SerpAID gives first-aid guidance grounded in the WHO snakebite protocol. It does not diagnose the snake, does not identify venom type, and does not replace a hospital. Every pathway ends in one instruction: reach a health facility that stocks antivenom now.
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <div class="footer-top">
+      <div class="brand"><svg class="mark" viewBox="0 0 32 32" fill="none"><path d="M6 20c4-2 4-8 8-8s4 6 8 4 4-8 4-8" stroke="#38ffb0" stroke-width="2.4" stroke-linecap="round"/><circle cx="25" cy="9" r="1.6" fill="#38ffb0"/></svg> SerpAID</div>
+      <div>Strands SDK: Workshop to Ship · social good for a neglected tropical disease</div>
+    </div>
+    <div>Grounded in World Health Organization snakebite envenoming guidance. Open source under the MIT License.</div>
+  </footer>
+</main>
+
+<script src="assets/scene.js"></script>
+<script src="assets/motion.js"></script>
+</body>
+</html>
