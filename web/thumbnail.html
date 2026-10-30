@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1280px;height:720px;overflow:hidden;background:#070b0a;font-family:'Inter',sans-serif;position:relative}
+  canvas{position:absolute;inset:0}
+  .vignette{position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 10%,transparent 45%,rgba(0,0,0,.72))}
+  .grain{position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .pad{position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between}
+  .top{display:flex;align-items:center;gap:14px}
+  .mark{width:38px;height:38px}
+  .brand{font-weight:700;font-size:26px;letter-spacing:.01em;color:#eef3f1}
+  .kick{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:#38ffb0}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:92px;line-height:.98;letter-spacing:-.02em;color:#f3f8f6;max-width:19ch}
+  h1 .em{font-style:italic;color:#38ffb0}
+  .sub{margin-top:26px;font-size:25px;font-weight:500;color:#aec4bc;max-width:30ch}
+  .foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:16px;color:#cfe3db;background:rgba(16,26,23,.6);
+    border:1px solid rgba(120,170,155,.22);border-radius:999px;padding:11px 20px;backdrop-filter:blur(8px)}
+  .chip b{color:#38ffb0}
+  .num{position:absolute;right:80px;bottom:150px;text-align:right}
+  .num .big{font-family:'Fraunces',serif;font-weight:600;font-size:120px;line-height:.9;color:#38ffb0;text-shadow:0 0 50px rgba(56,255,176,.35)}
+  .num .cap{font-family:'JetBrains Mono',monospace;font-size:16px;color:#9fb3ac;letter-spacing:.08em;margin-top:6px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="pad">
+  <div class="top">
+    <svg class="mark" viewBox="0 0 32 32" fill="none"><path d="M6 20c4-2 4-8 8-8s4 6 8 4 4-8 4-8" stroke="#38ffb0" stroke-width="2.6" stroke-linecap="round"/><circle cx="25" cy="9" r="1.8" fill="#38ffb0"/></svg>
+    <span class="brand">SerpAID</span>
+    <span class="kick">AI agent for social good</span>
+  </div>
+  <div>
+    <h1>The <span class="em">60 seconds</span> that save a life.</h1>
+    <div class="sub">A WHO-grounded snakebite first-aid agent, in any language.</div>
+  </div>
+  <div class="foot">
+    <span class="chip"><b>Strands SDK</b></span>
+    <span class="chip"><b>Amazon Nova</b></span>
+    <span class="chip"><b>Translate + Polly</b></span>
+    <span class="chip"><b>AgentCore live</b></span>
+  </div>
+</div>
+<div class="num">
+  <div class="big">138K</div>
+  <div class="cap">deaths a year, mostly preventable</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// one calm snakebite curve of glowing motes, static-ish for the thumbnail
+const c=document.getElementById('c');
+const r=new THREE.WebGLRenderer({canvas:c,antialias:true,alpha:true});
+r.setPixelRatio(2);r.setSize(1280,720);
+const sc=new THREE.Scene();const cam=new THREE.PerspectiveCamera(60,1280/720,.1,100);cam.position.set(0,0,18);
+const N=3000,pos=new Float32Array(N*3),seed=new Float32Array(N);
+for(let i=0;i<N;i++){seed[i]=Math.random()}
+const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+const cv=document.createElement('canvas');cv.width=cv.height=64;const gx=cv.getContext('2d');
+const gr=gx.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(120,255,205,1)');gr.addColorStop(.4,'rgba(56,255,176,.5)');gr.addColorStop(1,'rgba(56,255,176,0)');gx.fillStyle=gr;gx.fillRect(0,0,64,64);
+const tx=new THREE.Texture(cv);tx.needsUpdate=true;
+const m=new THREE.PointsMaterial({size:.5,map:tx,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,color:0x38ffb0,opacity:.9});
+const pts=new THREE.Points(g,m);sc.add(pts);
+const T=1.1;
+for(let i=0;i<N;i++){const u=seed[i],j=(seed[i]-.5);
+  pos[i*3]=(u-.5)*44;pos[i*3+1]=Math.sin(u*7.5+T)*3.6+Math.sin(u*3.1-T*.6)*1.8+j*2.2-1;pos[i*3+2]=Math.cos(u*5.2+T*.8)*2.7+j*2;}
+g.attributes.position.needsUpdate=true;pts.rotation.z=-.05;
+r.render(sc,cam);
+window.__ready=true;
+</script>
+</body>
+</html>
