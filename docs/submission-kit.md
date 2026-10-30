@@ -31,6 +31,12 @@ The article body is ready in `docs/builder-center-article.md`. Paste it as is.
 > SerpAID: an AI agent that saves lives in the first 60 seconds of a snakebite
 > SerpAID: WHO-grounded snakebite first aid with Strands Agents SDK and Amazon Nova
 
+## 3b. Builder Center cover image
+
+Upload `demo/builder-cover.png` (1200x675, under 2 MB, minimal text as AWS recommends)
+as the article cover on Builder Center. Futuristic dark finish, brand serpent current,
+the agent node-ring, and a play marker that reads as a clickable video cover.
+
 ## 4. YouTube description (paste as is)
 
 ```
