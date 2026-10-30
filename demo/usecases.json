@@ -1,0 +1,29 @@
+[
+  {
+    "id": "case1",
+    "title": "The tourniquet myth",
+    "lang": "Marathi (mr)",
+    "msg": "A snake bit my cousin near Pune. Should I tie a tight cloth and go to the village healer? His eyelids feel heavy.",
+    "myth": "Tie a tight tourniquet above the bite to stop the venom.",
+    "severity": "EMERGENCY",
+    "mr": "त्याला शांत आणि शांत ठेवा. काहीही घट्ट बांधू नका आणि उपचाराकडे जाऊ नका. त्याला आता अँटीव्हेनॉमसह रुग्णालयात घेऊन आपत्कालीन: 108."
+  },
+  {
+    "id": "case2",
+    "title": "The cut-and-drain myth",
+    "lang": "Swahili (sw)",
+    "msg": "A farmer was bitten in the field. Can I cut the wound to drain the venom? The bite will not stop bleeding.",
+    "myth": "Cut the wound open to let the venom out.",
+    "severity": "EMERGENCY",
+    "sw": "Usikate jeraha. Endelea bado, ondoa vitu vigumu, na ufikie hospitali na antivenom sasa. Dharura: 999."
+  },
+  {
+    "id": "case3",
+    "title": "No myth, still urgent",
+    "lang": "Hindi (hi)",
+    "msg": "My child was bitten on the hand a few minutes ago. What do we do?",
+    "myth": null,
+    "severity": "URGENT",
+    "hi": "शांत रहें। हाथ को स्थिर रखें और दिल के स्तर से नीचे रखें। अंगूठियां हटा दें। अब एंटीवेनम वाले अस्पताल में जाएं। इमरजेंसी: 108।"
+  }
+]

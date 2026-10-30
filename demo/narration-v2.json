@@ -1,0 +1,34 @@
+{
+  "voice": "Ruth",
+  "engine": "long-form",
+  "note": "Full produced demo narration. No em dashes. Structure: intro, problem, use cases, repo, outro.",
+  "segments": [
+    {"id":"v_intro",   "text":"SerpAID. The sixty seconds that save a life after a snakebite."},
+    {"id":"v_problem", "text":"A snake bites someone every five minutes, and up to one hundred and thirty eight thousand people die every year. Most of those deaths are preventable. The victims are almost always farmers and children in poor rural communities. This became personal for me the day a snake bit my cousin, and nobody around us knew what to do."},
+    {"id":"v_case1",   "text":"Use case one, the tourniquet myth. A cousin is bitten near Pune. The caller asks if they should tie a tight cloth and go to a village healer. SerpAID catches both as harmful, flags the drooping eyelids as a neurotoxic emergency, and answers in Marathi, ending with 108."},
+    {"id":"v_case2",   "text":"Use case two, the cut and drain myth. A farmer is bitten in the field and the caller wants to cut the wound. SerpAID refuses that, gives the WHO steps, and replies in Swahili for an East African caller, ending with the local emergency number."},
+    {"id":"v_case3",   "text":"Use case three, no myth but still urgent. A child is bitten on the hand. There is no harmful action to correct, but SerpAID still treats every bite as potentially venomous, never says it is safe, and sends them to antivenom now, in Hindi."},
+    {"id":"v_safety",  "text":"The reason you can trust it: the language model never decides anything medical. A tested, deterministic engine owns every instruction and can never recommend a tourniquet, a cut, or suction. Amazon Nova only phrases and translates."},
+    {"id":"v_repo",    "text":"It is built with the Strands Agents SDK and Amazon Nova, deployed live on Bedrock AgentCore, and it is fully open source on GitHub under the MIT license. The repo has the deterministic engine, the safety tests, and the Strands multi agent graph."},
+    {"id":"v_outro",   "text":"If this could help someone in the first minutes of a snakebite, please like, comment, share, and subscribe. The code and links are in the description. Thank you for watching."}
+  ],
+  "intro_card": {
+    "series": "Strands SDK · Workshop to Ship",
+    "title": "SerpAID",
+    "tagline": "The 60 seconds that save a life after a snakebite",
+    "by": "built by Sarvar Nadaf"
+  },
+  "outro_card": {
+    "cta": "Like · Comment · Share · Subscribe",
+    "repo": "github.com/simplynadaf/serpaid-snakebite-first-aid-agent",
+    "site": "simplynadaf.github.io/serpaid-snakebite-first-aid-agent",
+    "socials": [
+      "sarvarnadaf.com",
+      "LinkedIn  in/sarvar04",
+      "YouTube  @sarvar-nadaf",
+      "Dev.to  @sarvar_04",
+      "AWS Builder  @sarvar",
+      "GitHub  simplynadaf"
+    ]
+  }
+}
