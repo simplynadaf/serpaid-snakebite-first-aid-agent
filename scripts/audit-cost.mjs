@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+const reqs = [];
+const b = await chromium.launch();
+const p = await b.newPage();
+p.on('request', r => reqs.push(r.url()));
+await p.goto('https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/', { waitUntil: 'networkidle' });
+await p.waitForTimeout(3000);
+const billable = reqs.filter(u => /amazonaws|bedrock|execute-api|translate|polly|lambda/i.test(u));
+const external = [...new Set(reqs.map(u => new URL(u).host))];
+console.log('billable AWS calls:', billable.length, billable);
+console.log('all hosts contacted:', external.join(', '));
+await b.close();
