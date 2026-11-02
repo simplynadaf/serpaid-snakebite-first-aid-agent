@@ -2,9 +2,9 @@
 title: I Built a Snakebite First-Aid AI Agent on Strands and Nova
 published: false
 description: A snake bit my cousin and nobody knew what to do. So I built a WHO-grounded AI agent where deterministic code, not the LLM, decides every medical step.
-tags: ai, aws, python, showdev
-cover_image: https://raw.githubusercontent.com/simplynadaf/serpaid-snakebite-first-aid-agent/master/demo/serpaid-thumbnail.png
-canonical_url:
+tags: ai, aws, discuss, showdev
+cover_image: https://raw.githubusercontent.com/simplynadaf/serpaid-snakebite-first-aid-agent/master/demo/60-seconds-to-save-a-life.png
+canonical_url: https://dev.to/sarvar_04/i-built-a-snakebite-first-aid-ai-agent-on-strands-and-nova
 ---
 
 A snake bit my cousin on the ankle. He was in a field near Pune, and the people who loved him did everything wrong in the first ten minutes. Someone shouted to tie a cloth tight above the bite. Someone else said take him to the village healer first. We burned the minutes that mattered most on exactly the things that make a snakebite worse.
