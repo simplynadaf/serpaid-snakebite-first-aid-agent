@@ -39,7 +39,7 @@ The part I care about most: **the language model never decides anything medical.
 
 Under the hood it is a Strands multi-agent graph, intake then protocol then communicator, running on Amazon Nova, with Amazon Translate for mother-tongue text and Amazon Location Service for nearest care. Amazon Polly gives each answer a live spoken voice, shown across Hindi, Spanish, French, and Portuguese. It is deployed live on Amazon Bedrock AgentCore and open source under MIT.
 
-The project site has an interactive Live demo: type a message or pick an example, see the grounded answer in the caller's language, and hear the Amazon Polly voice. Run the repo locally and the same panel goes truly live.
+The project site has an interactive demo: pick an example, see the grounded answer in the caller's language, and hear the Amazon Polly voice. The site is fully static and free to host; the live agent is deployed on Amazon Bedrock AgentCore, and cloning the repo lets you call it for real.
 
 ---
 
@@ -105,7 +105,7 @@ SerpAID is a Strands multi-agent graph with a fixed order, so it behaves the sam
 
 Proven safety, from the test suite: SerpAID rebuts eight documented fatal myths, escalates every critical danger sign to an emergency, treats every bite as potentially venomous, and across the full test matrix recommends zero harmful actions.
 
-You can try it on the project site. The Live demo panel takes a panicked message, catches the dangerous action, shows the WHO answer in the caller's language, and plays the Amazon Polly voice. Run the repo locally and the same panel calls the live agent for real.
+You can try it on the project site. The demo panel takes a real example message, catches the dangerous action, shows the WHO answer in the caller's language, and plays the Amazon Polly voice. The hosted page is fully static and free; clone the repo to call the live agent on Amazon Bedrock AgentCore for real.
 
 ---
 

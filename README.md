@@ -61,7 +61,7 @@
 # open http://127.0.0.1:8808  →  type a panic message, pick a language, press "Get live guidance & speak it"
 ```
 
-**Or use the real website's built-in demo.** The landing page's **Live demo** section ([`docs/index.html`](docs/index.html) / the hosted site) has an interactive panel: type a message or pick an example, and it shows the response and plays the Amazon Polly voice. On the hosted static page it replays saved real responses; with the local bridge above running, the same panel calls the live agent (Nova + Translate + Polly) and the badge flips to **● LIVE**.
+**Or use the website's built-in demo.** The landing page's **Live demo** section ([`docs/index.html`](docs/index.html) / the hosted site) has an interactive panel: pick an example, and it shows the response and plays the Amazon Polly voice. The hosted page is fully static and free to host, replaying saved real responses. To drive the agent live yourself, run the local bridge above (`livedemo/`) or call the deployed Amazon Bedrock AgentCore endpoint.
 
 This calls the real WHO engine, Amazon Translate, and Amazon Polly on each request. Regenerate the samples anytime with `PYTHONPATH=. .venv/bin/python scripts/make_samples.py`.
 
@@ -83,7 +83,7 @@ This calls the real WHO engine, Amazon Translate, and Amazon Polly on each reque
 
 <img src="demo/shot-safety.png" alt="The safety split: what the deterministic engine owns versus what the model is only allowed to do" width="760" />
 
-**The interactive Live demo: type a message, see the response, and hear the Amazon Polly voice**
+**The interactive demo on the site: pick an example, see the response, and hear the Amazon Polly voice**
 
 <img src="demo/shot-demo.png" alt="The interactive Live demo on the site: a caller message in, SerpAID catches the tourniquet myth, grades severity, answers in the caller's language, and plays the Amazon Polly voice" width="760" />
 
