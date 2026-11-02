@@ -1,7 +1,7 @@
 ---
-title: I Built a Snakebite First-Aid AI Agent Where the Model Never Decides the Dangerous Part
+title: I Built a Snakebite First-Aid AI Agent on Strands and Nova
 published: false
-description: A snake bit my cousin and nobody knew what to do. So I built a WHO-grounded AI agent on Strands and Amazon Nova where a deterministic engine owns every medical decision, not the LLM.
+description: A snake bit my cousin and nobody knew what to do. So I built a WHO-grounded AI agent where deterministic code, not the LLM, decides every medical step.
 tags: ai, aws, python, showdev
 cover_image: https://raw.githubusercontent.com/simplynadaf/serpaid-snakebite-first-aid-agent/master/demo/serpaid-thumbnail.png
 canonical_url:
