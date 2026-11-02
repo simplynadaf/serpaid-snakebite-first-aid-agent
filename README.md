@@ -225,7 +225,7 @@ python -m pytest tests/ -q
 SerpAID is deployed and running on **Amazon Bedrock AgentCore Runtime**, with CloudWatch logs and OpenTelemetry traces enabled:
 
 ```
-arn:aws:bedrock-agentcore:us-east-1:175662053988:runtime/serpaid-G2FMzKGEoy
+arn:aws:bedrock-agentcore:us-east-1:<ACCOUNT_ID>:runtime/serpaid-G2FMzKGEoy
 ```
 
 A live invocation of the hosted endpoint is captured in `demo/live-agentcore-invocation.json`. In it, the running agent catches the tourniquet and the village healer as harmful, grades the drooping eyelids as serious, gives the WHO first-aid steps in order, and delivers the whole plan in Marathi with the 108 emergency number.

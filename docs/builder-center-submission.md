@@ -9,7 +9,7 @@ in the demo. AgentCore hosts the live endpoint.
 Shared links:
 - GitHub repository: https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 - Endpoint or live demo: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/
-- Live agent runtime (AgentCore ARN): arn:aws:bedrock-agentcore:us-east-1:175662053988:runtime/serpaid-G2FMzKGEoy
+- Live agent runtime (AgentCore ARN): arn:aws:bedrock-agentcore:us-east-1:<ACCOUNT_ID>:runtime/serpaid-G2FMzKGEoy
 - Demo video: (paste your public YouTube or Vimeo link once uploaded)
 - Cover image: demo/builder-cover.png (1200 x 675, 721 KB)
 

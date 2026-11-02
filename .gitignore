@@ -16,3 +16,7 @@ demo/_chk-*.png
 demo/live-frame-*.png
 
 demo/full-raw/
+
+# generated deploy config (contains account id, role ARNs, local paths)
+.bedrock_agentcore.yaml
+assets/audio/*-list.txt

@@ -1,6 +1,6 @@
 {
   "captured_at": "2026-10-30T15:01:08.991501Z",
-  "agent_runtime_arn": "arn:aws:bedrock-agentcore:us-east-1:175662053988:runtime/serpaid-G2FMzKGEoy",
+  "agent_runtime_arn": "arn:aws:bedrock-agentcore:us-east-1:<ACCOUNT_ID>:runtime/serpaid-G2FMzKGEoy",
   "service": "Amazon Bedrock AgentCore Runtime",
   "region": "us-east-1",
   "prompt": "A snake bit my cousin on the ankle near Pune India. Should I tie a tight cloth and go to the village healer? His eyelids feel heavy. Reply in Marathi, code mr, country IN.",
