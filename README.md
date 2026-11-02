@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="demo/serpaid-thumbnail.png" alt="SerpAID: the sixty seconds that save a life after a snakebite. A WHO-grounded, multilingual first-aid agent that coaches the person beside the victim through the right actions, in their own language." width="840" />
+<img src="demo/60-seconds-to-save-a-life.png" alt="SerpAID: 60 seconds to save a life. An AI that speaks your language, coaching the person beside a snakebite victim through the right WHO first aid before the ambulance arrives." width="840" />
 
 # 🐍 SerpAID coaches you through the first sixty seconds of a snakebite
 
