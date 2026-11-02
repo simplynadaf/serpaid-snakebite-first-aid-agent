@@ -20,3 +20,4 @@ demo/full-raw/
 # generated deploy config (contains account id, role ARNs, local paths)
 .bedrock_agentcore.yaml
 assets/audio/*-list.txt
+demo/serpaid-demo-short.mp4
