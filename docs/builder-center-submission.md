@@ -39,6 +39,8 @@ The part I care about most: **the language model never decides anything medical.
 
 Under the hood it is a Strands multi-agent graph, intake then protocol then communicator, running on Amazon Nova, with Amazon Translate for mother-tongue text and Amazon Location Service for nearest care. Amazon Polly gives each answer a live spoken voice, shown across Hindi, Spanish, French, and Portuguese. It is deployed live on Amazon Bedrock AgentCore and open source under MIT.
 
+The project site has an interactive Live demo: type a message or pick an example, see the grounded answer in the caller's language, and hear the Amazon Polly voice. Run the repo locally and the same panel goes truly live.
+
 ---
 
 This one is personal. A snake bit my cousin and nobody around us knew what to do. SerpAID is the calm, correct voice I wish we had that day.
@@ -102,6 +104,8 @@ Every medical instruction lives in a WHO protocol file and flows through a deter
 SerpAID is a Strands multi-agent graph with a fixed order, so it behaves the same way every time. An intake agent understands the panic and extracts the country, language, symptoms, and the action the rescuer is about to take. A protocol agent calls the deterministic engine. A communicator agent translates the plan with Amazon Translate. The whole thing runs on Amazon Nova and deploys to Amazon Bedrock AgentCore Runtime for a live endpoint. Amazon Polly then gives the translated answer a live spoken voice in the caller's own language, demonstrated across Hindi, Spanish, French, and Portuguese, so it reaches someone who cannot read.
 
 Proven safety, from the test suite: SerpAID rebuts eight documented fatal myths, escalates every critical danger sign to an emergency, treats every bite as potentially venomous, and across the full test matrix recommends zero harmful actions.
+
+You can try it on the project site. The Live demo panel takes a panicked message, catches the dangerous action, shows the WHO answer in the caller's language, and plays the Amazon Polly voice. Run the repo locally and the same panel calls the live agent for real.
 
 ---
 

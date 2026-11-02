@@ -28,6 +28,8 @@ Grounding here is not a nice-to-have. It is the safety mechanism.
 
 SerpAID is a Strands multi-agent graph with a fixed order, so it behaves the same way every time. An intake agent understands the panic and extracts the country, language, symptoms, and the action the rescuer is about to take. A protocol agent calls the deterministic engine. A communicator agent speaks the plan and translates it with Amazon Translate. The whole thing runs on Amazon Nova, deploys to Amazon Bedrock AgentCore Runtime for a live endpoint, and uses Amazon Polly to speak the guidance aloud for someone who cannot read.
 
+The project site carries an interactive Live demo of exactly this: you type a panicked message or pick an example, SerpAID catches the dangerous action and answers in the caller's language, and Amazon Polly speaks the response aloud, demonstrated across Hindi, Spanish, French, and Portuguese. Run the repo locally and the same panel calls the live agent for real.
+
 ## A real exchange
 
 A caller writes: a snake bit my cousin on the ankle near Pune, should I tie a tight cloth and take him to the village healer, his eyelids feel heavy. SerpAID instantly flags the tourniquet and the healer as dangerous and explains why. It gives the five WHO steps in order. It treats the drooping eyelids as a neurotoxic emergency. Then it delivers the entire message in Marathi, spoken by Polly, ending with 108.

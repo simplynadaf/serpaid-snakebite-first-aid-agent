@@ -1,0 +1,11 @@
+{
+  "voice": "Matthew",
+  "engine": "neural",
+  "segments": [
+    { "id": "n_github", "text": "First, the code. SerpAID is fully open source on GitHub under the MIT license. A deterministic WHO protocol engine, a Strands multi-agent graph on Amazon Nova, and a tested guarantee that the model can never recommend a harmful action." },
+    { "id": "n_case_hi", "text": "Use case one. A caller in India is about to tie a tight tourniquet and rush to a village healer, and the victim's eyelids feel heavy. Watch SerpAID catch the tourniquet myth, flag the danger sign, and answer out loud in Hindi." },
+    { "id": "n_case_pt", "text": "Use case two. A farm worker, hours from a clinic, has the bite packed in ice. SerpAID ends the wait, says remove the ice and move now, and speaks the answer in Portuguese." },
+    { "id": "n_case_es", "text": "Use case three. A child has trouble breathing while a relative tries to suck the venom out. SerpAID stops the suction, escalates to an emergency, and responds in Spanish." },
+    { "id": "n_case_fr", "text": "Use case four. A woman is bitten near a river and the wound keeps bleeding. No myth to correct, but SerpAID keeps the family calm and treats it as the emergency it is, in French." }
+  ]
+}

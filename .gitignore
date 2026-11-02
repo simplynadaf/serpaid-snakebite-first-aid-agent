@@ -14,3 +14,5 @@ demo/*check*.png
 demo/live-raw/
 demo/_chk-*.png
 demo/live-frame-*.png
+
+demo/full-raw/

@@ -83,9 +83,9 @@ This calls the real WHO engine, Amazon Translate, and Amazon Polly on each reque
 
 <img src="demo/shot-safety.png" alt="The safety split: what the deterministic engine owns versus what the model is only allowed to do" width="760" />
 
-**A real exchange, grounded and translated into Marathi**
+**The interactive Live demo: type a message, see the response, and hear the Amazon Polly voice**
 
-<img src="demo/shot-demo.png" alt="The live demo transcript: SerpAID catches the tourniquet and healer, gives the WHO steps, and answers in Marathi" width="760" />
+<img src="demo/shot-demo.png" alt="The interactive Live demo on the site: a caller message in, SerpAID catches the tourniquet myth, grades severity, answers in the caller's language, and plays the Amazon Polly voice" width="760" />
 
 </div>
 
