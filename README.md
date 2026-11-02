@@ -61,6 +61,8 @@
 # open http://127.0.0.1:8808  →  type a panic message, pick a language, press "Get live guidance & speak it"
 ```
 
+**Or use the real website's built-in demo.** The landing page's **Live demo** section ([`docs/index.html`](docs/index.html) / the hosted site) has an interactive panel: type a message or pick an example, and it shows the response and plays the Amazon Polly voice. On the hosted static page it replays saved real responses; with the local bridge above running, the same panel calls the live agent (Nova + Translate + Polly) and the badge flips to **● LIVE**.
+
 This calls the real WHO engine, Amazon Translate, and Amazon Polly on each request. Regenerate the samples anytime with `PYTHONPATH=. .venv/bin/python scripts/make_samples.py`.
 
 ---

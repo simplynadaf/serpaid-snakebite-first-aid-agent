@@ -23,6 +23,7 @@ from pathlib import Path
 
 import boto3
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -45,6 +46,15 @@ VOICE_BY_LANG = {
 }
 
 app = FastAPI(title="SerpAID live demo")
+
+# Allow the hosted/static page (any origin, incl. file:// which sends Origin: null)
+# to call this local bridge for the true live demo.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 _translate = boto3.client("translate", region_name=REGION)
 _polly = boto3.client("polly", region_name=REGION)
