@@ -51,3 +51,9 @@ I want to be honest about where the current build stops, because naming the limi
 SerpAID gives first-aid guidance grounded in the WHO protocol. It does not diagnose the snake, does not identify venom type, and does not replace a hospital. Every path it gives ends in reaching a facility with antivenom now. For a neglected disease that kills the world's poorest, a calm and correct voice in the first sixty seconds can be the difference between a scare and a funeral.
 
 Code is open source under the MIT License. Built with the Strands Agents SDK, Amazon Nova, Amazon Translate, Amazon Polly, Amazon Location Service, and Amazon Bedrock AgentCore.
+
+## Links
+
+- Demo video: https://youtu.be/NhebaIE32uo
+- Code (MIT): https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
+- Live site: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/
