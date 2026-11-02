@@ -185,7 +185,7 @@ If you build agents, I would love your feedback on exactly one thing: **where do
 
 - Live demo: [the interactive SerpAID site](https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/)
 - Builder Center project: [SerpAID on AWS Builder Center](https://builder.aws.com/project/3LY2kzBnTkUIA5AnwAQe9gShRDY/serpaid-a-who-grounded-snakebite-first-aid-ai-agent-built-with-strands-sdk-and-amazon-nova)
-- Built for the [Strands SDK: Workshop to Ship](https://builder.aws.com/build/hackathons/8311dcb5-1ece-3d62-a441-2e1c2ad90b86/strands-sdk-workshop-to-ship) hackathon
+- Built for the [Weekend Challenge: Map it](https://builder.aws.com/build/hackathons/e7a301ea-4d84-3b9e-95be-7340a70f7781/weekend-challenge-map-it) hackathon
 
 ---
 
