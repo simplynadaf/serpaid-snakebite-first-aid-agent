@@ -64,6 +64,8 @@ def test_engine_never_recommends_a_forbidden_action_as_advice(signs, text, regio
 
 The myths it catches (the tourniquet, the cut, the suction, the healer, ice, electric shock, alcohol, chasing the snake) only ever appear in the output as **corrections**, never as advice. A runtime guardrail and a test invariant both enforce that. Across the full test matrix, **22 passing tests**, the advice contains zero harmful actions.
 
+![The safety split: what the deterministic engine owns versus what the model is only allowed to do](https://raw.githubusercontent.com/simplynadaf/serpaid-snakebite-first-aid-agent/master/demo/shot-safety.png)
+
 ---
 
 ## How it works: a three-agent graph
@@ -103,6 +105,8 @@ def assess_snakebite(reported_signs: list[str], what_user_is_doing: str, region_
 
 The LLM never computes the plan. It calls the tool, and the tool is boring, tested Python. That is the point.
 
+![The three-agent Strands graph: intake on Amazon Nova, protocol on the deterministic WHO engine, communicator on Amazon Translate and Polly](https://raw.githubusercontent.com/simplynadaf/serpaid-snakebite-first-aid-agent/master/demo/shot-how.png)
+
 ---
 
 ## The AWS stack, and why each piece
@@ -132,6 +136,8 @@ The hardest part of a safety demo is proving it works without faking it. So I di
 First, the landing page has an **interactive demo** you can try. Pick a real case, watch SerpAID catch the dangerous action, read the WHO answer in the caller's language, and hear the Amazon Polly voice. The hosted page is fully static and replays saved real responses, so it costs nothing to run. Clone the repo and the same panel calls the live agent for real.
 
 Second, every sample in the repo is produced by the real pipeline, not hand-written. Five cases across five languages, with the actual input, the actual output, and a playable audio clip of the Polly voice a caller would hear.
+
+![The interactive demo on the site: a caller message in, the tourniquet myth caught, severity graded EMERGENCY, the answer in the caller's language, and the Amazon Polly voice](https://raw.githubusercontent.com/simplynadaf/serpaid-snakebite-first-aid-agent/master/demo/shot-demo.png)
 
 Here is the whole thing working end to end in under three minutes:
 
