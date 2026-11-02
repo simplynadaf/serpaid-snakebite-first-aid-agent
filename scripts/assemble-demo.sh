@@ -27,11 +27,12 @@ mux(){ # $1 clip  $2 narrator mp3  $3 response mp3 (or "")  $4 out  $5 respAt (s
     local roff
     if [ -n "$respAt" ]; then roff="$respAt"; else roff=$(python3 -c "print(round($nlen+0.6,2))"); fi
     local tlen; tlen=$(python3 -c "print(round(min($vlen, $roff+$rlen+1.0),2))")
-    ffmpeg -y -i "$clip" -i "$narr" -itsoffset "$roff" -i "$resp" \
-      -filter_complex "[1:a]apad[n];[2:a]apad[r];[n][r]amix=inputs=2:normalize=0:duration=longest[a]" \
+    local delayms; delayms=$(python3 -c "print(int($roff*1000))")
+    ffmpeg -y -i "$clip" -i "$narr" -i "$resp" \
+      -filter_complex "[1:a]adelay=0|0[n];[2:a]adelay=${delayms}|${delayms}[r];[n][r]amix=inputs=2:normalize=0:duration=longest[a]" \
       -map 0:v:0 -map "[a]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -r 25 \
       -c:a aac -b:a 160k -t "$tlen" "$out"
-    echo "muxed $(basename "$out")  narr@0 (${nlen}s)  response@${roff}s (${rlen}s)  clip ${tlen}s"
+    echo "muxed $(basename "$out")  narr@0 (${nlen}s)  response@${roff}s via adelay (${rlen}s)  clip ${tlen}s"
   else
     local tlen; tlen=$(python3 -c "print(round(min($vlen, $nlen+1.5),2))")
     ffmpeg -y -i "$clip" -i "$narr" -map 0:v:0 -map 1:a:0 \
