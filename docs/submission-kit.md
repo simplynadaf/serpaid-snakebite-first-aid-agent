@@ -69,6 +69,15 @@ Built for the Strands SDK: Workshop to Ship hackathon. Focus area: Health.
 Important: SerpAID gives first-aid guidance grounded in the WHO protocol. It does
 not diagnose the snake, does not identify venom type, and does not replace a
 hospital. Every path ends in reaching a facility with antivenom now.
+
+Follow me:
+Portfolio: https://sarvarnadaf.com
+LinkedIn: https://www.linkedin.com/in/sarvar04/
+GitHub: https://github.com/simplynadaf
+Dev.to: https://dev.to/sarvar_04
+YouTube: https://www.youtube.com/@sarvar-nadaf
+X: https://x.com/SarvarN_04
+AWS Builder Center: https://builder.aws.com/community/@sarvar
 ```
 
 Tags: strands agents, amazon nova, aws bedrock, agentcore, amazon polly, amazon
@@ -80,9 +89,9 @@ translate, snakebite, neglected tropical disease, ai agent, social good
 
 - [ ] Completed the free Strands workshop in-window (Oct 28 to Nov 4). MANDATORY.
 - [ ] Repo is public with MIT license visible (done).
-- [ ] Video uploaded as a public link, under 3 minutes (file is demo/serpaid-demo.mp4, 2:31).
+- [ ] Video uploaded as a public link. NOTE: the narrated 2K cut is ~3:52; the hackathon requires UNDER 3 minutes, so use a trimmed sub-3-min cut for the submission.
 - [ ] Article published on Builder Center with the hackathon name in the title.
-- [ ] Live AgentCore endpoint linked in the article (run deploy.py).
+- [ ] Live AgentCore endpoint already deployed; ARN is in the submission doc.
 - [ ] Repo link, video link, and live link all pasted into the submission form.
 - [ ] Submit before Nov 4, 11:59 PM PST.
 
