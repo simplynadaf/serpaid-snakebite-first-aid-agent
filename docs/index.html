@@ -348,12 +348,12 @@
   <section id="demo" class="wrap">
     <div class="eyebrow reveal">Try it</div>
     <h2 class="section-title reveal">See it respond, in any language.</h2>
-    <p class="section-sub reveal">Type a panicked message or pick an example. SerpAID catches the dangerous action, gives the WHO first aid, and speaks the answer in the caller's language. On this hosted page it replays saved real responses with real Amazon Polly voice. Run the repo locally and the same panel calls the live agent (Nova + Translate + Polly) for real.</p>
+    <p class="section-sub reveal">Pick an example and press the button. SerpAID catches the dangerous action, gives the WHO first aid, and speaks the answer in the caller's language. These are real responses, produced earlier by the agent (WHO engine, Amazon Nova, Amazon Translate, Amazon Polly) and saved here, so this page is fully static and costs nothing to run. The live agent is deployed on Amazon Bedrock AgentCore; clone the repo to call it for real.</p>
 
     <div class="demo-ui reveal">
       <div class="demo-controls">
         <div class="demo-label">The caller's message</div>
-        <textarea id="demoInput" rows="3" placeholder="e.g. My cousin was bitten, should I tie a tight cloth? His eyelids feel heavy."></textarea>
+        <textarea id="demoInput" rows="3" readonly aria-label="The example caller's message"></textarea>
         <div class="demo-row">
           <select id="demoCase" aria-label="Example case">
             <option value="0">🇮🇳 Hindi · tourniquet + heavy eyelids</option>
@@ -417,46 +417,41 @@
 <script>
 (function(){
   var S = window.SERPAID_SAMPLES || [];
-  var LIVE = "http://127.0.0.1:8808"; // local bridge; present only when you run it
-  // ?record=1 mutes the page's own voice so a screen recording can lay a clean
-  // narrator + response track without the page audio overlapping it.
-  var RECORD = /[?&]record=1/.test(location.search);
+  // Fully static, cost-free demo. No backend, no AWS calls at runtime. It replays
+  // saved real responses (produced earlier by the real WHO engine + Amazon Translate
+  // + Amazon Polly) and their saved voice. Nothing here costs anything to host.
   var el = function(id){ return document.getElementById(id); };
   var input = el('demoInput'), sel = el('demoCase'), go = el('demoGo');
   var modeBox = el('demoMode'), modeText = el('demoModeText');
-  function playAudio(){ if (RECORD) return; try { el('demoAudio').play().catch(function(){}); } catch(_){} }
 
-  function setMode(text, live){
-    modeText.textContent = text;
-    modeBox.className = 'demo-mode' + (live ? ' live' : '');
-  }
+  function setMode(text){ modeText.textContent = text; modeBox.className = 'demo-mode'; }
 
   function reveal(){ ['demoMyth','demoAnswer','demoVoice'].forEach(function(id){
     var n=el(id); n.classList.remove('appear'); void n.offsetWidth; n.classList.add('appear'); }); }
 
-  function show(d, inputText){
-    el('demoUser').textContent = inputText || '';
-    var sev = (d.severity || 'urgent').toLowerCase();
+  function show(c){
+    el('demoUser').textContent = c.input;
+    var sev = (c.severity || 'urgent').toLowerCase();
     var sevEl = el('demoSev');
     sevEl.textContent = sev === 'emergency' ? 'EMERGENCY' : 'URGENT';
     sevEl.className = 'sevtag ' + sev;
     var myth = el('demoMyth');
-    if (d.myth) { myth.style.display='block'; el('demoMythText').textContent = (typeof d.myth==='string'? d.myth : d.myth.correction); }
+    if (c.myth) { myth.style.display='block'; el('demoMythText').textContent = (typeof c.myth==='string'? c.myth : c.myth.correction); }
     else { myth.style.display='none'; }
-    el('demoAnswerLabel').textContent = (d.langLabel || d.lang_label || 'Answer') + ' · grounded in the WHO protocol';
-    el('demoAnswerText').textContent = d.translated;
-    el('demoVoiceLabel').textContent = (d.langLabel || d.lang_label || '') + ' · spoken by Amazon Polly';
+    el('demoAnswerLabel').textContent = c.langLabel + ' · grounded in the WHO protocol';
+    el('demoAnswerText').textContent = c.translated;
+    el('demoVoiceLabel').textContent = c.langLabel + ' · spoken by Amazon Polly';
     reveal();
   }
 
   function loadSample(i){
     var c = S[i]; if (!c) return;
     input.value = c.input;
-    show(c, c.input);
+    show(c);
     el('demoAudio').src = c.audio;
-    el('demoAudio').pause();          // never auto-play on load or language change
+    el('demoAudio').pause();                 // never auto-play
     try { el('demoAudio').currentTime = 0; } catch(_){}
-    setMode('replaying a saved real response', false);
+    setMode('saved example response');
   }
 
   function showTyping(){
@@ -466,31 +461,19 @@
     el('demoVoiceLabel').textContent = 'preparing the spoken answer';
   }
 
-  // LIVE-first: call the local bridge; if unreachable, replay the saved response.
-  async function run(){
-    var i = +sel.value, c = S[i];
-    var text = input.value.trim() || (c? c.input : '');
-    el('demoUser').textContent = text;
+  // Replay the saved response for the selected example, then play its saved voice.
+  function run(){
+    var i = +sel.value, c = S[i]; if (!c) return;
     showTyping();
     go.disabled = true; go.textContent = 'Working…';
-    setMode('calling the live agent…', true);
-    var langCode = ['hi','pt','es','fr'][i] || 'hi';
-    try {
-      var r = await fetch(LIVE + '/ask', {method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({text: text, lang: langCode, region_code: (c&&c.emergency==='108')?'IN':'US'}), signal: AbortSignal.timeout(3000)});
-      if (!r.ok) throw new Error('no live');
-      var d = await r.json(); d.langLabel = d.lang_label;
-      show(d, text);
-      setMode('● LIVE · Nova + Translate + Polly', true);
-      var s = await fetch(LIVE + '/speak', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({text: d.spoken || d.translated, lang: langCode})});
-      var blob = await s.blob();
-      el('demoAudio').src = URL.createObjectURL(blob);
-      playAudio();
-    } catch(e) {
-      loadSample(i);
-      playAudio();
-    }
-    go.disabled = false; go.textContent = 'Get guidance & speak it ▶';
+    setMode('replaying the saved response…');
+    setTimeout(function(){
+      show(c);
+      el('demoAudio').src = c.audio;
+      setMode('saved example · real WHO answer + Amazon Polly voice');
+      try { el('demoAudio').currentTime = 0; el('demoAudio').play().catch(function(){}); } catch(_){}
+      go.disabled = false; go.textContent = 'Get guidance & speak it ▶';
+    }, 1400);                                // brief, realistic "working" beat
   }
 
   if (S.length){
