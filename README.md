@@ -38,6 +38,33 @@
 
 ---
 
+## 🎬 See It Respond (samples + live demo)
+
+**Want to know how it answers before running anything?** The [`samples/`](samples/) folder has real inputs, outputs, and **playable audio** for five cases across Hindi, Portuguese, Spanish, French, and English. Every sample is produced by the real pipeline (WHO engine + Amazon Translate + Amazon Polly), not hand-written.
+
+- 📄 **[samples/SAMPLES.md](samples/SAMPLES.md)** — type-this → get-this, with the myth it catches and the full answer in each language.
+- 🔊 **[samples/audio/](samples/audio/)** — the spoken Polly response for each case (the exact audio a caller hears).
+- 🧾 **[samples/samples.json](samples/samples.json)** — machine-readable inputs and outputs.
+
+| You type | Language | SerpAID catches | Severity | Hear it |
+|---|---|---|---|---|
+| "Should I tie a tight cloth and go to the healer? His eyelids feel heavy." | Hindi | the tourniquet myth | URGENT | [🔊](samples/audio/tourniquet-eyelids.hi.mp3) |
+| "We packed the wound in ice while we wait." | Portuguese | the ice myth | URGENT | [🔊](samples/audio/ice-remote.pt.mp3) |
+| "He is having trouble breathing. His uncle is sucking the venom out." | Spanish | the suction myth | EMERGENCY | [🔊](samples/audio/suction-breathing.es.mp3) |
+| "The wound keeps bleeding, we are scared." | French | no harmful action | EMERGENCY | [🔊](samples/audio/bleeding-scared.fr.mp3) |
+| "A hiker was bitten an hour ago, what do we do?" | English | no harmful action | URGENT | [🔊](samples/audio/no-myth-english.en.mp3) |
+
+**Run the interactive live demo yourself** (type a message, hear the live voice):
+
+```bash
+.venv/bin/python -m uvicorn livedemo.server:app --host 127.0.0.1 --port 8808
+# open http://127.0.0.1:8808  →  type a panic message, pick a language, press "Get live guidance & speak it"
+```
+
+This calls the real WHO engine, Amazon Translate, and Amazon Polly on each request. Regenerate the samples anytime with `PYTHONPATH=. .venv/bin/python scripts/make_samples.py`.
+
+---
+
 ## 📸 Screenshots
 
 <div align="center">
