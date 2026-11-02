@@ -25,6 +25,7 @@ fs.mkdirSync(CLIPS, { recursive: true });
 const REPO = 'https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent';
 const SITE = 'file://' + ROOT + '/docs/index.html?record=1';   // record mode = page audio muted
 const VW = 2560, VH = 1440;   // 2K 16:9 so website + github + bookend cards all fit
+const TIMING = {};            // per-case: when the answer actually appears on screen
 
 function dur(f) { return parseFloat(execSync(`ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "${f}"`).toString().trim()) || 10; }
 
@@ -82,25 +83,31 @@ async function recCase(c, idx) {
   await p.goto(SITE); await p.waitForTimeout(1200);
   await p.evaluate(() => document.getElementById('demo').scrollIntoView({ block: 'start' }));
   await p.waitForTimeout(900);
-  // pick the language, then CLEAR the auto-filled input and TYPE it visibly
+  const t0 = Date.now();                         // clip timeline starts here
   await p.selectOption('#demoCase', c.sel);
   await p.waitForTimeout(400);
-  await typeVisible(p, '#demoInput', c.text);   // real character-by-character typing
-  await p.waitForTimeout(800);                  // let the typed message be read
+  await typeVisible(p, '#demoInput', c.text);    // visible typing
+  await p.waitForTimeout(700);
   await p.click('#demoGo');
+  // wait until the response is actually on screen, then mark that instant
   try { await p.waitForSelector('.demo-mode.live', { timeout: 12000 }); } catch {}
-  // response voice plays as-is: hold for its full length
+  try { await p.waitForFunction(() => { const e=document.getElementById('demoAnswerText'); return e && e.textContent && e.textContent.length>20 && !e.querySelector('.typing'); }, { timeout: 12000 }); } catch {}
+  const respAt = (Date.now() - t0) / 1000;       // seconds into the clip when the answer appears
+  // response voice plays as-is from here
   await hold(p, (rlen + 1.5) * 1000);
+  const clipLen = (Date.now() - t0) / 1000;
   await ctx.close(); await b.close();
   const w = fs.readdirSync(d).find(f => f.endsWith('.webm'));
   fs.renameSync(path.join(d, w), path.join(CLIPS, `${idx}-${c.id}.webm`));
-  console.log(`CLIP ${idx}-${c.id}  narr ${nlen.toFixed(1)}  resp ${rlen.toFixed(1)}`);
+  TIMING[c.id] = { respAt: Math.round(respAt * 100) / 100, clipLen: Math.round(clipLen * 100) / 100 };
+  console.log(`CLIP ${idx}-${c.id}  respAt=${respAt.toFixed(1)}s  narr ${nlen.toFixed(1)}  resp ${rlen.toFixed(1)}`);
 }
 
 async function main() {
   await waitSrv('http://127.0.0.1:8808/');
   await recGithub();
   for (let i = 0; i < CASES.length; i++) await recCase(CASES[i], i + 1);
+  fs.writeFileSync(path.join(ROOT, 'demo', 'full-raw', 'timing.json'), JSON.stringify(TIMING, null, 2));
   console.log('ALL CLIPS DONE');
 }
 main().then(() => { server.kill('SIGTERM'); process.exit(0); })
