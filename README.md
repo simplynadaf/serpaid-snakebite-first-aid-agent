@@ -30,9 +30,9 @@
 
 ### The agent, running live on Amazon Nova
 
-<em>The intake agent catches the harmful action, the deterministic WHO engine grades severity and passes the no-harmful-action guardrail, and the communicator translates the plan into the caller's language.</em>
+<em>The live demo on the site: a caller's message comes in, the intake agent catches the harmful action, the deterministic WHO engine grades severity and passes the no-harmful-action guardrail, and the communicator answers in the caller's language with an Amazon Polly voice.</em>
 
-<img src="demo/liverun-frame.png" alt="SerpAID terminal run: the intake agent calling check_myth and detecting the tourniquet and traditional healer as harmful actions" width="760" />
+<img src="demo/liverun-frame.png" alt="SerpAID live demo: a caller message in, the tourniquet myth caught, severity graded, and the answer delivered in the caller's language with Amazon Polly voice" width="760" />
 
 </div>
 

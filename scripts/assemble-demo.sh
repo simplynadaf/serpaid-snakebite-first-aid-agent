@@ -21,19 +21,24 @@ mux(){ # $1 clip  $2 narrator mp3  $3 response mp3 (or "")  $4 out
   local vlen; vlen=$(vdur "$clip")
   local nlen; nlen=$(dur "$narr")
   if [ -n "$resp" ]; then
-    # narrator at 0s; response starts ~0.6s after narrator ends
+    local rlen; rlen=$(dur "$resp")
     local roff; roff=$(python3 -c "print(round($nlen+0.6,2))")
+    # trim the segment to exactly cover narrator + response + a 1s tail
+    local tlen; tlen=$(python3 -c "print(round(min($vlen, $nlen+0.6+$rlen+1.0),2))")
     ffmpeg -y -i "$clip" -i "$narr" -itsoffset "$roff" -i "$resp" \
       -filter_complex "[1:a]apad[n];[2:a]apad[r];[n][r]amix=inputs=2:normalize=0:duration=longest[a]" \
       -map 0:v:0 -map "[a]" -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -r 25 \
-      -c:a aac -b:a 160k -t "$vlen" "$out"
+      -c:a aac -b:a 160k -t "$tlen" "$out"
+    echo "muxed $(basename "$out")  trimmed to ${tlen}s (narr ${nlen} + resp ${rlen})"
   else
+    # narrator-only (github): trim to narrator + 1.5s tail
+    local tlen; tlen=$(python3 -c "print(round(min($vlen, $nlen+1.5),2))")
     ffmpeg -y -i "$clip" -i "$narr" -map 0:v:0 -map 1:a:0 \
       -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -r 25 \
-      -c:a aac -b:a 160k -af apad -t "$vlen" "$out"
+      -c:a aac -b:a 160k -af apad -t "$tlen" "$out"
+    echo "muxed $(basename "$out")  trimmed to ${tlen}s (narr only ${nlen})"
   fi
   echo "file '$(realpath "$out")'" >> "$WORK/concat.txt"
-  echo "muxed $(basename "$out")  v=${vlen}s"
 }
 
 mux "$CLIPS/0-github.webm" "$NARR/n_github.mp3"   ""                                   "$WORK/0-github.mp4"

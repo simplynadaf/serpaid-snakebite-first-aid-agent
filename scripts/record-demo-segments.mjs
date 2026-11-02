@@ -24,8 +24,18 @@ fs.mkdirSync(CLIPS, { recursive: true });
 
 const REPO = 'https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent';
 const SITE = 'file://' + ROOT + '/docs/index.html';
+const VW = 2560, VH = 1440;   // 2K 16:9 so website + github + bookend cards all fit
 
 function dur(f) { return parseFloat(execSync(`ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "${f}"`).toString().trim()) || 10; }
+
+// type visibly, one character at a time, into a field
+async function typeVisible(page, sel, text) {
+  await page.click(sel);
+  await page.fill(sel, '');
+  for (const ch of text) {
+    await page.type(sel, ch, { delay: 45 + Math.random() * 55 });
+  }
+}
 
 const server = spawn(path.join(ROOT, '.venv', 'bin', 'python'),
   ['-m', 'uvicorn', 'livedemo.server:app', '--host', '127.0.0.1', '--port', '8808'], { cwd: ROOT, stdio: 'ignore' });
@@ -35,17 +45,17 @@ async function hold(page, ms){ const n=Math.ceil(ms/250); for(let i=0;i<n;i++){ 
 async function smooth(page, ms){ const h=await page.evaluate(()=>Math.max(1,document.body.scrollHeight-window.innerHeight)); const s=60,w=Math.max(12,Math.floor(ms/s)); for(let i=1;i<=s;i++){await page.evaluate(y=>window.scrollTo(0,y),h*i/s);await page.waitForTimeout(w);} }
 
 const CASES = [
-  { id: 'hi', sel: '0', resp: 'tourniquet-eyelids.hi.mp3' },
-  { id: 'pt', sel: '1', resp: 'ice-remote.pt.mp3' },
-  { id: 'es', sel: '2', resp: 'suction-breathing.es.mp3' },
-  { id: 'fr', sel: '3', resp: 'bleeding-scared.fr.mp3' },
+  { id: 'hi', sel: '0', resp: 'tourniquet-eyelids.hi.mp3', text: 'My cousin was just bitten by a snake on the ankle near Pune. Should I tie a tight cloth above the bite and take him to the village healer? His eyelids feel heavy.' },
+  { id: 'pt', sel: '1', resp: 'ice-remote.pt.mp3', text: 'A farm worker was bitten in the field. We packed the wound in ice while we wait. He is hours from any clinic.' },
+  { id: 'es', sel: '2', resp: 'suction-breathing.es.mp3', text: 'My son was bitten by a snake and now he is having trouble breathing. His uncle is trying to suck the venom out.' },
+  { id: 'fr', sel: '3', resp: 'bleeding-scared.fr.mp3', text: 'A woman was bitten near the river and the wound keeps bleeding. We are very scared and do not know what to do.' },
 ];
 
 async function recGithub() {
   const d = path.join(CLIPS, '_gh'); fs.mkdirSync(d, { recursive: true });
   const nlen = dur(path.join(NARR, 'n_github.mp3'));
   const b = await chromium.launch();
-  const ctx = await b.newContext({ viewport: { width: 1280, height: 800 }, recordVideo: { dir: d, size: { width: 1280, height: 800 } } });
+  const ctx = await b.newContext({ viewport: { width: VW, height: VH }, recordVideo: { dir: d, size: { width: VW, height: VH } } });
   const p = await ctx.newPage();
   try {
     await p.goto(REPO + '#readme', { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -67,14 +77,16 @@ async function recCase(c, idx) {
   const nlen = dur(path.join(NARR, `n_case_${c.id}.mp3`));
   const rlen = dur(path.join(RESP, c.resp));
   const b = await chromium.launch({ args: ['--autoplay-policy=no-user-gesture-required'] });
-  const ctx = await b.newContext({ viewport: { width: 1280, height: 800 }, recordVideo: { dir: d, size: { width: 1280, height: 800 } } });
+  const ctx = await b.newContext({ viewport: { width: VW, height: VH }, recordVideo: { dir: d, size: { width: VW, height: VH } } });
   const p = await ctx.newPage();
   await p.goto(SITE); await p.waitForTimeout(1200);
   await p.evaluate(() => document.getElementById('demo').scrollIntoView({ block: 'start' }));
-  await p.waitForTimeout(800);
+  await p.waitForTimeout(900);
+  // pick the language, then CLEAR the auto-filled input and TYPE it visibly
   await p.selectOption('#demoCase', c.sel);
-  // narrator is explaining during this window: show the input settling
-  await hold(p, Math.max(3000, (nlen - 2) * 1000));
+  await p.waitForTimeout(400);
+  await typeVisible(p, '#demoInput', c.text);   // real character-by-character typing
+  await p.waitForTimeout(800);                  // let the typed message be read
   await p.click('#demoGo');
   try { await p.waitForSelector('.demo-mode.live', { timeout: 12000 }); } catch {}
   // response voice plays as-is: hold for its full length
