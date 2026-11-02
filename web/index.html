@@ -172,27 +172,54 @@
   .msg.alert{background:rgba(255,93,93,.1);border:1px solid rgba(255,93,93,.3)}
   .msg .mini{font-size:11.5px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
 
-  /* interactive demo UI */
-  .demo-ui{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;margin-top:var(--space-5)}
-  @media (max-width:820px){.demo-ui{grid-template-columns:1fr}}
-  .demo-controls{display:flex;flex-direction:column;gap:12px}
+  /* interactive demo UI — premium */
+  .demo-ui{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;margin-top:var(--space-5)}
+  @media (max-width:820px){.demo-ui{grid-template-columns:1fr;gap:24px}}
+  .demo-controls{display:flex;flex-direction:column;gap:14px;
+    background:linear-gradient(180deg,rgba(56,255,176,.05),rgba(10,21,18,.4));
+    border:1px solid var(--line);border-radius:22px;padding:22px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+  .demo-label{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600}
   #demoInput{width:100%;background:#060d0b;color:var(--ink);border:1px solid var(--line);
-    border-radius:14px;padding:14px;font-family:inherit;font-size:15px;resize:vertical;line-height:1.5}
+    border-radius:14px;padding:15px;font-family:inherit;font-size:15px;resize:vertical;line-height:1.55;
+    transition:border-color .2s,box-shadow .2s}
+  #demoInput::placeholder{color:var(--faint)}
+  #demoInput:focus{outline:none;border-color:var(--venom);box-shadow:0 0 0 3px rgba(56,255,176,.14)}
   .demo-row{display:flex;gap:10px;flex-wrap:wrap}
-  #demoCase{flex:1;min-width:180px;background:#060d0b;color:var(--ink);border:1px solid var(--line);
-    border-radius:12px;padding:12px 14px;font-family:inherit;font-size:14px}
-  .demo-btn{background:var(--venom);color:#05231a;border:none;border-radius:12px;padding:12px 18px;
-    font-size:14.5px;font-weight:600;cursor:pointer;transition:filter .15s,transform .1s}
-  .demo-btn:hover{filter:brightness(1.08)} .demo-btn:active{transform:translateY(1px)}
-  .demo-btn:disabled{opacity:.55;cursor:wait}
-  .demo-mode{font-size:12px;color:var(--faint);letter-spacing:.04em}
+  #demoCase{flex:1;min-width:190px;background:#060d0b;color:var(--ink);border:1px solid var(--line);
+    border-radius:12px;padding:13px 14px;font-family:inherit;font-size:14px;cursor:pointer;
+    transition:border-color .2s}
+  #demoCase:focus{outline:none;border-color:var(--venom)}
+  .demo-btn{position:relative;overflow:hidden;background:linear-gradient(180deg,#5affc0,var(--venom));
+    color:#05231a;border:none;border-radius:12px;padding:13px 20px;font-size:14.5px;font-weight:700;
+    cursor:pointer;letter-spacing:.01em;transition:filter .15s,transform .1s,box-shadow .2s;
+    box-shadow:0 10px 30px -10px rgba(56,255,176,.5)}
+  .demo-btn::after{content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+    transform:skewX(-18deg);transition:none}
+  .demo-btn:hover{filter:brightness(1.06)} .demo-btn:hover::after{animation:sheen 1s ease}
+  .demo-btn:active{transform:translateY(1px) scale(.99)}
+  .demo-btn:disabled{opacity:.6;cursor:wait;box-shadow:none}
+  @keyframes sheen{to{left:140%}}
+  .demo-mode{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--faint);letter-spacing:.04em}
+  .demo-mode .ring{width:7px;height:7px;border-radius:50%;background:var(--faint)}
   .demo-mode.live{color:var(--venom)}
+  .demo-mode.live .ring{background:var(--venom);box-shadow:0 0 10px var(--venom);animation:pulse 1.2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+  .phone{transition:box-shadow .4s}
   .phone .bar .sevtag{margin-left:auto;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-    padding:3px 9px;border-radius:999px;font-weight:600}
-  .sevtag.emergency{background:rgba(255,93,93,.16);color:var(--danger);border:1px solid rgba(255,93,93,.4)}
-  .sevtag.urgent{background:rgba(255,194,75,.16);color:#ffc24b;border:1px solid rgba(255,194,75,.4)}
-  .msg.bot.appear{animation:msgIn .4s cubic-bezier(.32,.72,0,1) both}
-  @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    padding:4px 10px;border-radius:999px;font-weight:700}
+  .sevtag.emergency{background:rgba(255,93,93,.16);color:var(--danger);border:1px solid rgba(255,93,93,.45);
+    box-shadow:0 0 16px -4px rgba(255,93,93,.5)}
+  .sevtag.urgent{background:rgba(255,194,75,.16);color:#ffc24b;border:1px solid rgba(255,194,75,.45)}
+  .msg.bot.appear{animation:msgIn .5s cubic-bezier(.32,.72,0,1) both}
+  #demoMyth.appear{animation-delay:.05s}#demoAnswer.appear{animation-delay:.15s}#demoVoice.appear{animation-delay:.25s}
+  @keyframes msgIn{from{opacity:0;transform:translateY(10px) scale(.98);filter:blur(3px)}
+    to{opacity:1;transform:none;filter:blur(0)}}
+  .typing{display:inline-flex;gap:4px;padding:4px 0}
+  .typing span{width:7px;height:7px;border-radius:50%;background:var(--venom);opacity:.5;animation:td 1s infinite}
+  .typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+  @keyframes td{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
 
   /* tech badges */
   .badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--space-4)}
@@ -325,17 +352,18 @@
 
     <div class="demo-ui reveal">
       <div class="demo-controls">
+        <div class="demo-label">The caller's message</div>
         <textarea id="demoInput" rows="3" placeholder="e.g. My cousin was bitten, should I tie a tight cloth? His eyelids feel heavy."></textarea>
         <div class="demo-row">
           <select id="demoCase" aria-label="Example case">
-            <option value="0">Hindi · tourniquet + heavy eyelids</option>
-            <option value="1">Portuguese · ice on the wound</option>
-            <option value="2">Spanish · suction + trouble breathing</option>
-            <option value="3">French · bleeding bite</option>
+            <option value="0">🇮🇳 Hindi · tourniquet + heavy eyelids</option>
+            <option value="1">🇧🇷 Portuguese · ice on the wound</option>
+            <option value="2">🇪🇸 Spanish · suction + trouble breathing</option>
+            <option value="3">🇫🇷 French · bleeding bite</option>
           </select>
           <button id="demoGo" class="demo-btn">Get guidance &amp; speak it ▶</button>
         </div>
-        <div id="demoMode" class="demo-mode">replaying a saved real response</div>
+        <div id="demoMode" class="demo-mode"><span class="ring"></span><span id="demoModeText">replaying a saved real response</span></div>
       </div>
 
       <div class="phone reveal" id="demoPhone">
@@ -391,11 +419,19 @@
   var S = window.SERPAID_SAMPLES || [];
   var LIVE = "http://127.0.0.1:8808"; // local bridge; present only when you run it
   var el = function(id){ return document.getElementById(id); };
-  var input = el('demoInput'), sel = el('demoCase'), go = el('demoGo'), mode = el('demoMode');
+  var input = el('demoInput'), sel = el('demoCase'), go = el('demoGo');
+  var modeBox = el('demoMode'), modeText = el('demoModeText');
 
-  function show(d, opts){
-    opts = opts || {};
-    el('demoUser').textContent = opts.input || (S[+sel.value] ? S[+sel.value].input : '');
+  function setMode(text, live){
+    modeText.textContent = text;
+    modeBox.className = 'demo-mode' + (live ? ' live' : '');
+  }
+
+  function reveal(){ ['demoMyth','demoAnswer','demoVoice'].forEach(function(id){
+    var n=el(id); n.classList.remove('appear'); void n.offsetWidth; n.classList.add('appear'); }); }
+
+  function show(d, inputText){
+    el('demoUser').textContent = inputText || '';
     var sev = (d.severity || 'urgent').toLowerCase();
     var sevEl = el('demoSev');
     sevEl.textContent = sev === 'emergency' ? 'EMERGENCY' : 'URGENT';
@@ -406,37 +442,45 @@
     el('demoAnswerLabel').textContent = (d.langLabel || d.lang_label || 'Answer') + ' · grounded in the WHO protocol';
     el('demoAnswerText').textContent = d.translated;
     el('demoVoiceLabel').textContent = (d.langLabel || d.lang_label || '') + ' · spoken by Amazon Polly';
-    ['demoMyth','demoAnswer','demoVoice'].forEach(function(id){ var n=el(id); n.classList.remove('appear'); void n.offsetWidth; n.classList.add('appear'); });
+    reveal();
   }
 
   function loadSample(i){
     var c = S[i]; if (!c) return;
     input.value = c.input;
-    show(c, {input: c.input});
+    show(c, c.input);
     el('demoAudio').src = c.audio;
-    mode.textContent = 'replaying a saved real response'; mode.className='demo-mode';
+    setMode('replaying a saved real response', false);
   }
 
-  // try the live local bridge; if present, go truly live, else fall back to sample
+  function showTyping(){
+    el('demoMyth').style.display='none';
+    el('demoAnswerLabel').textContent = 'SerpAID is working';
+    el('demoAnswerText').innerHTML = '<span class="typing"><span></span><span></span><span></span></span>';
+    el('demoVoiceLabel').textContent = 'preparing the spoken answer';
+  }
+
+  // LIVE-first: call the local bridge; if unreachable, replay the saved response.
   async function run(){
     var i = +sel.value, c = S[i];
     var text = input.value.trim() || (c? c.input : '');
+    el('demoUser').textContent = text;
+    showTyping();
     go.disabled = true; go.textContent = 'Working…';
+    setMode('calling the live agent…', true);
     var langCode = ['hi','pt','es','fr'][i] || 'hi';
     try {
       var r = await fetch(LIVE + '/ask', {method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({text: text, lang: langCode, region_code: (c&&c.emergency==='108')?'IN':'US'}), signal: AbortSignal.timeout(2500)});
+        body: JSON.stringify({text: text, lang: langCode, region_code: (c&&c.emergency==='108')?'IN':'US'}), signal: AbortSignal.timeout(3000)});
       if (!r.ok) throw new Error('no live');
-      var d = await r.json();
-      d.langLabel = d.lang_label;
-      show(d, {input: text});
+      var d = await r.json(); d.langLabel = d.lang_label;
+      show(d, text);
+      setMode('● LIVE · Nova + Translate + Polly', true);
       var s = await fetch(LIVE + '/speak', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({text: d.spoken || d.translated, lang: langCode})});
       var blob = await s.blob();
       el('demoAudio').src = URL.createObjectURL(blob);
       el('demoAudio').play().catch(function(){});
-      mode.textContent = '● LIVE · Nova + Translate + Polly'; mode.className='demo-mode live';
     } catch(e) {
-      // hosted static site: replay the saved real response + voice
       loadSample(i);
       try { await el('demoAudio').play(); } catch(_){}
     }
