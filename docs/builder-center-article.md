@@ -54,6 +54,6 @@ Code is open source under the MIT License. Built with the Strands Agents SDK, Am
 
 ## Links
 
-- Demo video: https://youtu.be/NhebaIE32uo
+- Demo video: https://youtu.be/fnZB7-OdAuw
 - Code (MIT): https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 - Live site: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/

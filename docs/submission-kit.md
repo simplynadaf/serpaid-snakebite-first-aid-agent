@@ -21,7 +21,7 @@ The article body is ready in `docs/builder-center-article.md`. Paste it as is.
 
 - Public repo: https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 - Live site: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/
-- Public video: https://youtu.be/NhebaIE32uo
+- Public video: https://youtu.be/fnZB7-OdAuw
 - Live demo endpoint: (AgentCore agent ARN or invoke URL once you run deploy.py)
 
 ---

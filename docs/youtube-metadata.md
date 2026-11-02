@@ -3,7 +3,7 @@
 Video: demo/serpaid-demo-under3min.mp4 (2560x1440, 2:26, H.264 + AAC, ambient bed)
 Long cut: demo/serpaid-demo.mp4 (3:52, 4 languages) - extended version, optional
 S3: s3://sarvars-youtube-videos/serpaid/
-Current upload: https://youtu.be/NhebaIE32uo
+Current upload: https://youtu.be/fnZB7-OdAuw
 House rule: no em dashes.
 
 ---

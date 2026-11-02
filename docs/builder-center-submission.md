@@ -10,7 +10,7 @@ Shared links:
 - GitHub repository: https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 - Endpoint or live demo: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/
 - Live agent runtime (AgentCore ARN): arn:aws:bedrock-agentcore:us-east-1:<ACCOUNT_ID>:runtime/serpaid-G2FMzKGEoy
-- Demo video: https://youtu.be/NhebaIE32uo
+- Demo video: https://youtu.be/fnZB7-OdAuw
 - Cover image: demo/builder-cover.png (1200 x 675, 721 KB)
 
 ===============================================================================
@@ -47,7 +47,7 @@ This one is personal. A snake bit my cousin and nobody around us knew what to do
 
 - Repo: https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 - Live site: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/
-- Demo video: https://youtu.be/NhebaIE32uo
+- Demo video: https://youtu.be/fnZB7-OdAuw
 
 I would love feedback, especially on the line between what the model decides and what deterministic code decides in a safety agent.
 

@@ -14,7 +14,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-7c6cff)](LICENSE)
 
 [![Live demo](https://img.shields.io/badge/🖥%20Try%20the%20live%20site-7c6cff)](https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/)
-[![Watch the demo](https://img.shields.io/badge/▶%20Watch%20the%20demo-FF0000?logo=youtube&logoColor=white)](https://youtu.be/NhebaIE32uo)
+[![Watch the demo](https://img.shields.io/badge/▶%20Watch%20the%20demo-FF0000?logo=youtube&logoColor=white)](https://youtu.be/fnZB7-OdAuw)
 
 **🐍 Built for the [Strands SDK: Workshop to Ship](https://builder.aws.com/build/hackathons/8311dcb5-1ece-3d62-a441-2e1c2ad90b86/strands-sdk-workshop-to-ship) hackathon. Focus area: Health.**
 
@@ -350,7 +350,7 @@ Any language Amazon Translate supports, including Hindi, Marathi, Tamil, Telugu,
 - 🐍 Hackathon: https://builder.aws.com/build/hackathons/8311dcb5-1ece-3d62-a441-2e1c2ad90b86/strands-sdk-workshop-to-ship
 - 📦 Repo: https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 - 🖥️ Live site: https://simplynadaf.github.io/serpaid-snakebite-first-aid-agent/
-- ▶️ Demo video: https://youtu.be/NhebaIE32uo
+- ▶️ Demo video: https://youtu.be/fnZB7-OdAuw
 
 <div align="center">
 <img src="demo/serpaid-thumbnail.png" alt="SerpAID: the sixty seconds that save a life after a snakebite" width="640" />
