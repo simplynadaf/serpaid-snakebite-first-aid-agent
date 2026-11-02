@@ -23,7 +23,7 @@ const RESP = path.join(ROOT, 'samples', 'audio');
 fs.mkdirSync(CLIPS, { recursive: true });
 
 const REPO = 'https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent';
-const SITE = 'file://' + ROOT + '/docs/index.html';
+const SITE = 'file://' + ROOT + '/docs/index.html?record=1';   // record mode = page audio muted
 const VW = 2560, VH = 1440;   // 2K 16:9 so website + github + bookend cards all fit
 
 function dur(f) { return parseFloat(execSync(`ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "${f}"`).toString().trim()) || 10; }
