@@ -65,7 +65,7 @@ Every medical instruction lives in a WHO protocol file and flows through a deter
 
 ## How it works
 
-SerpAID is a Strands multi-agent graph with a fixed order, so it behaves the same way every time. An intake agent understands the panic and extracts the country, language, symptoms, and the action the rescuer is about to take. A protocol agent calls the deterministic engine. A communicator agent speaks the plan and translates it with Amazon Translate. The whole thing runs on Amazon Nova, deploys to Amazon Bedrock AgentCore Runtime for a live endpoint, and uses Amazon Polly to speak the guidance aloud for someone who cannot read.
+SerpAID is a Strands multi-agent graph with a fixed order, so it behaves the same way every time. An intake agent understands the panic and extracts the country, language, symptoms, and the action the rescuer is about to take. A protocol agent calls the deterministic engine. A communicator agent speaks the plan and translates it with Amazon Translate. The whole thing runs on Amazon Nova and deploys to Amazon Bedrock AgentCore Runtime for a live endpoint. Amazon Polly then gives the translated answer a live spoken voice in the caller's own language, demonstrated across Hindi, Spanish, French, and Portuguese, so it reaches someone who cannot read.
 
 Proven safety, from the test suite: SerpAID rebuts eight documented fatal myths, escalates every critical danger sign to an emergency, treats every bite as potentially venomous, and across the full test matrix recommends zero harmful actions.
 

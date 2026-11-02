@@ -56,9 +56,11 @@ from harmful first aid and delay, not the venom alone. Those deaths are
 preventable.
 
 Architecture: a Strands multi-agent graph (intake, protocol, communicator) on
-Amazon Nova, with Amazon Translate for mother-tongue output, Amazon Polly for
-spoken guidance, Amazon Location Service for nearest care, and Amazon Bedrock
-AgentCore Runtime for a live endpoint.
+Amazon Nova, with Amazon Translate for mother-tongue output and Amazon Location
+Service for nearest care, deployed on Amazon Bedrock AgentCore Runtime for a
+live endpoint. Amazon Polly gives each response a live spoken voice in the
+caller's own language, shown in the demo across Hindi, Spanish, French, and
+Portuguese.
 
 Code (MIT, open source): https://github.com/simplynadaf/serpaid-snakebite-first-aid-agent
 
