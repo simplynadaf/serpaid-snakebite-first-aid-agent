@@ -88,13 +88,17 @@ async function recCase(c, idx) {
   await p.waitForTimeout(400);
   await typeVisible(p, '#demoInput', c.text);    // visible typing
   await p.waitForTimeout(700);
+  const clickAt = (Date.now() - t0) / 1000;      // the moment the Generate button is clicked
   await p.click('#demoGo');
   // wait until the response is actually on screen, then mark that instant
   try { await p.waitForSelector('.demo-mode.live', { timeout: 12000 }); } catch {}
   try { await p.waitForFunction(() => { const e=document.getElementById('demoAnswerText'); return e && e.textContent && e.textContent.length>20 && !e.querySelector('.typing'); }, { timeout: 12000 }); } catch {}
-  const respAt = (Date.now() - t0) / 1000;       // seconds into the clip when the answer appears
-  // response voice plays as-is from here
-  await hold(p, (rlen + 1.5) * 1000);
+  const answerAt = (Date.now() - t0) / 1000;     // when the answer actually appears
+  // voice starts 2.5s AFTER the click (and never before the answer is on screen)
+  const respAt = Math.max(clickAt + 2.5, answerAt);
+  // hold long enough for the (delayed) voice to finish fully on screen
+  const tailFromNow = (respAt - answerAt) + rlen + 1.5;
+  await hold(p, tailFromNow * 1000);
   const clipLen = (Date.now() - t0) / 1000;
   await ctx.close(); await b.close();
   const w = fs.readdirSync(d).find(f => f.endsWith('.webm'));
